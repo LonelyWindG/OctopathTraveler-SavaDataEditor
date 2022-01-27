@@ -1,3 +1,6 @@
+SUDALV's changes: I've added Treasure Chests lists by location (sorry, only 2 locations have a names, but it was still helpful for me to find last 2 chests)
+
+
 ![DL Count](https://img.shields.io/github/downloads/turtle-insect/OctopathTraveler/total.svg)
 [![Build status](https://ci.appveyor.com/api/projects/status/p0qp4jhksi2j0ktq?svg=true)](https://ci.appveyor.com/project/turtle-insect/octopathtraveler)
 
