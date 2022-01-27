@@ -37,7 +37,6 @@ namespace OctopathTraveler
             //sorry i'm too lazy to make proper read of txt doctionary, because i only know two location names.
             switch (address)
             {
-                case 1261083: Name = "Murkwood"; break;
                 case 1261893: Name = "Lizardmen's Den"; break;
                 default:
                     break;
