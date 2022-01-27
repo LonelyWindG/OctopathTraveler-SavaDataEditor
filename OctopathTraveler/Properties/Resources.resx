@@ -189,6 +189,9 @@
   <data name="TabItemTameMonster" xml:space="preserve">
     <value>TameMonster</value>
   </data>
+  <data name="TabItemTreasure" xml:space="preserve">
+    <value>TreasureStates</value>
+  </data>
   <data name="TabItemWeak" xml:space="preserve">
     <value>Weak</value>
   </data>

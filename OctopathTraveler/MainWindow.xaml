@@ -332,6 +332,20 @@
                         </ListBox>
                     </Grid>
                 </TabItem>
+                <TabItem Header="{x:Static properties:Resources.TabItemTreasure}">
+                    <ListBox ItemsSource="{Binding TreasureStates}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Name}"/>
+                                    <Label Content="" Width="200"/>
+                                    <Label Content="Collected"/>
+                                    <Label Content="{Binding Collected}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </TabItem>
             </TabControl>
         </DockPanel>
     </Grid>

@@ -78,7 +78,7 @@ namespace OctopathTraveler
 			Byte[] tmp = new Byte[size];
 			for(uint i = 0; i < size; i++)
 			{
-				if (mBuffer[address + i] == 0) break;
+				//if (mBuffer[address + i] == 0) break;
 				tmp[i] = mBuffer[address + i];
 			}
 			return mEncode.GetString(tmp).Trim('\0');
