@@ -246,8 +246,8 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="Name"/>
-                                    <Label Content="" Width="200"/>
+                                    <Label Content="ID"/>
+                                    <Label Content="{Binding Num}" Width="200"/>
                                     <Label Content="Sword"/>
                                     <CheckBox VerticalAlignment="Center" IsChecked="{Binding Sword}"/>
                                     <Label Content="Lance"/>

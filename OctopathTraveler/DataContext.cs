@@ -116,9 +116,13 @@ namespace OctopathTraveler
 
             uint weaks = save.FindAddress("EnemyInfoData", 0)[0];
             System.Console.WriteLine(save.FindAddress("IsAnalyse_", 0).Count);
-            foreach (uint i in save.FindAddress("IsAnalyse_", 0))
+            List<uint> isAnalyseList = save.FindAddress("IsAnalyse_", 0);
+            for (int i1 = 0; i1 < isAnalyseList.Count; i1++)
             {
-                EnemyWeaknesses.Add(new EnemyWeakness(i));
+                if (i1 == 422) break;
+                uint i = isAnalyseList[i1];
+                var weak = new EnemyWeakness(i) { Num = i1 };
+                EnemyWeaknesses.Add(weak);
             }
 
             gvas = new GVAS(null);
