@@ -1,4 +1,4 @@
-﻿<Window x:Class="OctopathTraveler.MainWindow"
+<Window x:Class="OctopathTraveler.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -159,37 +159,37 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="7*"/>
                             </Grid.RowDefinitions>
-                            <Label Content="Sword"/>
+                            <Label Content="{x:Static properties:Resources.ItemWeakSword}"/>
                             <Label Grid.Column="1" Content="{Binding ElementName=CharactorList, Path=SelectedItem.Sword, Converter={StaticResource CharactorEquipmentConverter}}"/>
                             <Button Grid.Column="2" Content="..." Click="ButtonSword_Click"/>
-                            <Label Grid.Row="1" Content="Lance"/>
+                            <Label Grid.Row="1" Content="{x:Static properties:Resources.ItemWeakLance}"/>
                             <Label Grid.Row="1" Grid.Column="1" Content="{Binding ElementName=CharactorList, Path=SelectedItem.Lance, Converter={StaticResource CharactorEquipmentConverter}}"/>
                             <Button Grid.Row="1" Grid.Column="2" Content="..." Click="ButtonLance_Click"/>
-                            <Label Grid.Row="2" Content="Dagger"/>
+                            <Label Grid.Row="2" Content="{x:Static properties:Resources.ItemWeakDagger}"/>
                             <Label Grid.Row="2" Grid.Column="1" Content="{Binding ElementName=CharactorList, Path=SelectedItem.Dagger, Converter={StaticResource CharactorEquipmentConverter}}"/>
                             <Button Grid.Row="2" Grid.Column="2" Content="..." Click="ButtonDagger_Click"/>
-                            <Label Grid.Row="3" Content="Axe"/>
+                            <Label Grid.Row="3" Content="{x:Static properties:Resources.ItemWeakAxe}"/>
                             <Label Grid.Row="3" Grid.Column="1" Content="{Binding ElementName=CharactorList, Path=SelectedItem.Axe, Converter={StaticResource CharactorEquipmentConverter}}"/>
                             <Button Grid.Row="3" Grid.Column="2" Content="..." Click="ButtonAxe_Click"/>
-                            <Label Grid.Row="4" Content="Bow"/>
+                            <Label Grid.Row="4" Content="{x:Static properties:Resources.ItemWeakBow}"/>
                             <Label Grid.Row="4" Grid.Column="1" Content="{Binding ElementName=CharactorList, Path=SelectedItem.Bow, Converter={StaticResource CharactorEquipmentConverter}}"/>
                             <Button Grid.Row="4" Grid.Column="2" Content="..." Click="ButtonBow_Click"/>
-                            <Label Grid.Row="5" Content="Rod"/>
+                            <Label Grid.Row="5" Content="{x:Static properties:Resources.ItemWeakRod}"/>
                             <Label Grid.Row="5" Grid.Column="1" Content="{Binding ElementName=CharactorList, Path=SelectedItem.Rod, Converter={StaticResource CharactorEquipmentConverter}}"/>
                             <Button Grid.Row="5" Grid.Column="2" Content="..." Click="ButtonRod_Click"/>
-                            <Label Grid.Row="6" Content="Shield"/>
+                            <Label Grid.Row="6" Content="{x:Static properties:Resources.ItemWeakShield}"/>
                             <Label Grid.Row="6" Grid.Column="1" Content="{Binding ElementName=CharactorList, Path=SelectedItem.Shield, Converter={StaticResource CharactorEquipmentConverter}}"/>
                             <Button Grid.Row="6" Grid.Column="2" Content="..." Click="ButtonShield_Click"/>
-                            <Label Grid.Row="7" Content="Head"/>
+                            <Label Grid.Row="7" Content="{x:Static properties:Resources.ItemWeakHead}"/>
                             <Label Grid.Row="7" Grid.Column="1" Content="{Binding ElementName=CharactorList, Path=SelectedItem.Head, Converter={StaticResource CharactorEquipmentConverter}}"/>
                             <Button Grid.Row="7" Grid.Column="2" Content="..." Click="ButtonHead_Click"/>
-                            <Label Grid.Row="8" Content="Body"/>
+                            <Label Grid.Row="8" Content="{x:Static properties:Resources.ItemWeakBody}"/>
                             <Label Grid.Row="8" Grid.Column="1" Content="{Binding ElementName=CharactorList, Path=SelectedItem.Body, Converter={StaticResource CharactorEquipmentConverter}}"/>
                             <Button Grid.Row="8" Grid.Column="2" Content="..." Click="ButtonBody_Click"/>
-                            <Label Grid.Row="9" Content="Accessory1"/>
+                            <Label Grid.Row="9" Content="{x:Static properties:Resources.ItemWeakAccessory1}"/>
                             <Label Grid.Row="9" Grid.Column="1" Content="{Binding ElementName=CharactorList, Path=SelectedItem.Accessory1, Converter={StaticResource CharactorEquipmentConverter}}"/>
                             <Button Grid.Row="9" Grid.Column="2" Content="..." Click="ButtonAccessory1_Click"/>
-                            <Label Grid.Row="10" Content="Accessory2"/>
+                            <Label Grid.Row="10" Content="{x:Static properties:Resources.ItemWeakAccessory2}"/>
                             <Label Grid.Row="10" Grid.Column="1" Content="{Binding ElementName=CharactorList, Path=SelectedItem.Accessory2, Converter={StaticResource CharactorEquipmentConverter}}"/>
                             <Button Grid.Row="10" Grid.Column="2" Content="..." Click="ButtonAccessory2_Click"/>
                         </Grid>
@@ -246,31 +246,32 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="ID"/>
-                                    <Label Content="{Binding Num}" Width="200"/>
-                                    <Label Content="Sword"/>
+                                    <CheckBox VerticalAlignment="Center" IsChecked="False" IsEnabled="False"/>
+                                    <Label Content="{Binding Num}" Width="35"/>
+                                    <Label Content="{Binding Name}" Width="200"/>
+                                    <Label Content="{x:Static properties:Resources.ItemWeakSword}"/>
                                     <CheckBox VerticalAlignment="Center" IsChecked="{Binding Sword}"/>
-                                    <Label Content="Lance"/>
+                                    <Label Content="{x:Static properties:Resources.ItemWeakLance}"/>
                                     <CheckBox VerticalAlignment="Center" IsChecked="{Binding Lance}"/>
-                                    <Label Content="Dagger"/>
+                                    <Label Content="{x:Static properties:Resources.ItemWeakDagger}"/>
                                     <CheckBox VerticalAlignment="Center" IsChecked="{Binding Dagger}"/>
-                                    <Label Content="Axe"/>
+                                    <Label Content="{x:Static properties:Resources.ItemWeakAxe}"/>
                                     <CheckBox VerticalAlignment="Center" IsChecked="{Binding Axe}"/>
-                                    <Label Content="Bow"/>
+                                    <Label Content="{x:Static properties:Resources.ItemWeakBow}"/>
                                     <CheckBox VerticalAlignment="Center" IsChecked="{Binding Bow}"/>
-                                    <Label Content="Rod"/>
+                                    <Label Content="{x:Static properties:Resources.ItemWeakRod}"/>
                                     <CheckBox VerticalAlignment="Center" IsChecked="{Binding Rod}"/>
-                                    <Label Content="Fire"/>
+                                    <Label Content="{x:Static properties:Resources.ItemWeakFire}"/>
                                     <CheckBox VerticalAlignment="Center" IsChecked="{Binding Fire}"/>
-                                    <Label Content="Ice"/>
+                                    <Label Content="{x:Static properties:Resources.ItemWeakIce}"/>
                                     <CheckBox VerticalAlignment="Center" IsChecked="{Binding Ice}"/>
-                                    <Label Content="Thunder"/>
+                                    <Label Content="{x:Static properties:Resources.ItemWeakThunder}"/>
                                     <CheckBox VerticalAlignment="Center" IsChecked="{Binding Thunder}"/>
-                                    <Label Content="Wind"/>
+                                    <Label Content="{x:Static properties:Resources.ItemWeakWind}"/>
                                     <CheckBox VerticalAlignment="Center" IsChecked="{Binding Wind}"/>
-                                    <Label Content="Light"/>
+                                    <Label Content="{x:Static properties:Resources.ItemWeakLight}"/>
                                     <CheckBox VerticalAlignment="Center" IsChecked="{Binding Light}"/>
-                                    <Label Content="Dark"/>
+                                    <Label Content="{x:Static properties:Resources.ItemWeakDark}"/>
                                     <CheckBox VerticalAlignment="Center" IsChecked="{Binding Dark}"/>
                                 </StackPanel>
                             </DataTemplate>
@@ -339,7 +340,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="{Binding Name}"/>
                                     <Label Content="" Width="200"/>
-                                    <Label Content="Collected"/>
+                                    <Label Content="State"/>
                                     <Label Content="{Binding Collected}"/>
                                 </StackPanel>
                             </DataTemplate>

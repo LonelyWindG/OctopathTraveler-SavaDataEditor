@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace OctopathTraveler
 {
@@ -14,6 +9,8 @@ namespace OctopathTraveler
         private readonly uint mWeaponAddress;
         private readonly uint mMagicAddress;
         private int num;
+
+        public string Name { get; set; }
 
         public EnemyWeakness(uint address)
         {

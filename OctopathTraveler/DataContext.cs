@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -95,13 +95,16 @@ namespace OctopathTraveler
             }
 
             var treasures = save.FindAddress("TreasureStateArray", 0);
+            int diff = treasures.Count > 0 ? checked((int)treasures[0] - 1257303) : 0;
             for (int i = 0; i < treasures.Count; i++)
             {
                 //gvas = new GVAS(null);
                 //gvas.AppendValue(treasures[i]);
                 uint treausreAddress = treasures[i] + 100;
+                uint showAddress = checked((uint)((int)treasures[i] - diff));
+
                 //var data = gvas.Key("TreasureStateArray_" + i);
-                var treasure = new TreasureState(treausreAddress);
+                var treasure = new TreasureState(treausreAddress, showAddress);
                 TreasureStates.Add(treasure);
             }
 
@@ -115,13 +118,18 @@ namespace OctopathTraveler
             }
 
             uint weaks = save.FindAddress("EnemyInfoData", 0)[0];
-            System.Console.WriteLine(save.FindAddress("IsAnalyse_", 0).Count);
+            Console.WriteLine(save.FindAddress("IsAnalyse_", 0).Count);
             List<uint> isAnalyseList = save.FindAddress("IsAnalyse_", 0);
             for (int i1 = 0; i1 < isAnalyseList.Count; i1++)
             {
                 if (i1 == 422) break;
                 uint i = isAnalyseList[i1];
                 var weak = new EnemyWeakness(i) { Num = i1 };
+                var info = Info.Instance().Search(Info.Instance().Enemies, checked((uint)i1));
+                if (info != null)
+                {
+                    weak.Name = info.Name;
+                }
                 EnemyWeaknesses.Add(weak);
             }
 

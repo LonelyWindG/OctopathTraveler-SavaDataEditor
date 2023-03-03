@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,17 +24,48 @@ namespace OctopathTraveler
 	{
 		public MainWindow()
 		{
-			InitializeComponent();
-		}
+            InitializeComponent();
+#if !DEBUG
+            Application.Current.DispatcherUnhandledException += OnDispatcherUnhandledException;
+#endif
+        }
 
-		private void Window_PreviewDragOver(object sender, DragEventArgs e)
+        private static void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            try
+            {
+                if (e.Handled)
+                    return;
+
+                HandleException(e.Exception);
+            }
+            finally
+            {
+                e.Handled = true;
+            }
+        }
+
+        private static void HandleException(Exception exception)
+        {
+            string ex = exception.ToString();
+            try
+            {
+                File.AppendAllText("exception.log", DateTime.Now.ToString() + "\n" + ex + "\n");
+            }
+            catch (Exception)
+            {
+            }
+            MessageBox.Show(ex, "Program Exception");
+        }
+
+        private void Window_PreviewDragOver(object sender, DragEventArgs e)
 		{
 			e.Handled = e.Data.GetDataPresent(DataFormats.FileDrop);
 		}
 
 		private void Window_Drop(object sender, DragEventArgs e)
 		{
-			String[] files = e.Data.GetData(DataFormats.FileDrop) as String[];
+            string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
 			if (files == null) return;
 			if (!System.IO.File.Exists(files[0])) return;
 

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace OctopathTraveler
 {
@@ -14,7 +10,7 @@ namespace OctopathTraveler
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public TreasureState(uint address)
+        public TreasureState(uint address, uint showAddress)
         {
             StringBuilder sb = new StringBuilder();
             uint readValue = 0;
@@ -34,16 +30,16 @@ namespace OctopathTraveler
             var result = sb.ToString().TrimEnd();
             Collected = result;
             Name = address.ToString();
-            //sorry i'm too lazy to make proper read of txt doctionary, because i only know two location names.
-            switch (address)
-            {
-                case 1261893: Name = "Lizardmen's Den"; break;
-                default:
-                    break;
-            }
+            ////sorry i'm too lazy to make proper read of txt doctionary, because i only know two location names.
+            //switch (address)
+            //{
+            //    case 1261893: Name = "Lizardmen's Den"; break;
+            //    default:
+            //        break;
+            //}
         }
 
-        public String Name
+        public string Name
         {
             get => name;
             set
