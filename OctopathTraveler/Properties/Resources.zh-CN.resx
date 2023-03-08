@@ -187,63 +187,63 @@
     <value>任务</value>
   </data>
   <data name="TabItemTameMonster" xml:space="preserve">
-    <value>驯服的怪物</value>
+    <value>捕获的魔物</value>
   </data>
   <data name="TabItemWeak" xml:space="preserve">
-    <value>弱点</value>
+    <value>怪物弱点</value>
   </data>
   <data name="ToolTipOpen" xml:space="preserve">
     <value>打开</value>
   </data>
-  <data name="ItemWeakSword" xml:space="preserve">
+  <data name="ItemSword" xml:space="preserve">
     <value>剑</value>
   </data>
-  <data name="ItemWeakLance" xml:space="preserve">
+  <data name="ItemLance" xml:space="preserve">
     <value>枪</value>
   </data>
-  <data name="ItemWeakDagger" xml:space="preserve">
+  <data name="ItemDagger" xml:space="preserve">
     <value>短剑</value>
   </data>
-  <data name="ItemWeakAxe" xml:space="preserve">
+  <data name="ItemAxe" xml:space="preserve">
     <value>斧</value>
   </data>
-  <data name="ItemWeakBow" xml:space="preserve">
+  <data name="ItemBow" xml:space="preserve">
     <value>弓</value>
   </data>
-  <data name="ItemWeakRod" xml:space="preserve">
+  <data name="ItemRod" xml:space="preserve">
     <value>杖</value>
   </data>
-  <data name="ItemWeakFire" xml:space="preserve">
+  <data name="ItemFire" xml:space="preserve">
     <value>火</value>
   </data>
-  <data name="ItemWeakIce" xml:space="preserve">
+  <data name="ItemIce" xml:space="preserve">
     <value>冰</value>
   </data>
-  <data name="ItemWeakThunder" xml:space="preserve">
+  <data name="ItemThunder" xml:space="preserve">
     <value>雷</value>
   </data>
-  <data name="ItemWeakWind" xml:space="preserve">
+  <data name="ItemWind" xml:space="preserve">
     <value>风</value>
   </data>
-  <data name="ItemWeakLight" xml:space="preserve">
+  <data name="ItemLight" xml:space="preserve">
     <value>光</value>
   </data>
-  <data name="ItemWeakDark" xml:space="preserve">
+  <data name="ItemDark" xml:space="preserve">
     <value>暗</value>
   </data>
-  <data name="ItemWeakAccessory1" xml:space="preserve">
+  <data name="ItemAccessory1" xml:space="preserve">
     <value>饰品1</value>
   </data>
-  <data name="ItemWeakAccessory2" xml:space="preserve">
+  <data name="ItemAccessory2" xml:space="preserve">
     <value>饰品2</value>
   </data>
-  <data name="ItemWeakBody" xml:space="preserve">
+  <data name="ItemBody" xml:space="preserve">
     <value>身体</value>
   </data>
-  <data name="ItemWeakHead" xml:space="preserve">
+  <data name="ItemHead" xml:space="preserve">
     <value>头</value>
   </data>
-  <data name="ItemWeakShield" xml:space="preserve">
+  <data name="ItemShield" xml:space="preserve">
     <value>盾</value>
   </data>
   <data name="TabItemTreasure" xml:space="preserve">
@@ -251,5 +251,14 @@
   </data>
   <data name="ToolTipSave" xml:space="preserve">
     <value>保存</value>
+  </data>
+  <data name="TabItemTameMonsterWarning" xml:space="preserve">
+    <value>该页面下拉选项中可选的魔物可能不是有效的可捕获魔物, 请慎重修改已捕获的魔物, 避免损坏您的存档。</value>
+  </data>
+  <data name="MenuDataWeakProgress" xml:space="preserve">
+    <value>怪物弱点完成进度</value>
+  </data>
+  <data name="MenuData" xml:space="preserve">
+    <value>数据</value>
   </data>
 </root>

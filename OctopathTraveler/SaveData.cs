@@ -174,7 +174,11 @@ namespace OctopathTraveler
                 {
                     if (mBuffer[index + len] != name[len]) break;
                 }
-                if (len >= name.Length) result.Add(index);
+                if (len >= name.Length)
+                {
+                    result.Add(index);
+                }
+
                 index += (uint)len;
             }
             return result;

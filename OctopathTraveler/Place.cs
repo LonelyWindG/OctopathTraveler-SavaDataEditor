@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OctopathTraveler
+﻿namespace OctopathTraveler
 {
-	class Place
+    class Place
 	{
 		private readonly uint mAddress;
 		private readonly uint mBit;
 
-		public Place(uint address, uint bit)
+		public Place(uint address, uint bit, string name)
 		{
 			mAddress = address;
 			mBit = bit;
+			Name = name;
 		}
 
-		public String Name { get; set; }
+		public string Name { get; }
 
 		public bool Visit
 		{

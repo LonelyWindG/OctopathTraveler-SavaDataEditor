@@ -15,7 +15,7 @@ namespace OctopathTraveler
         public List<NameValueInfo> Equipments { get; private set; } = new List<NameValueInfo>();
         public List<NameValueInfo> Countris { get; private set; } = new List<NameValueInfo>();
         public List<NameValueInfo> Places { get; private set; } = new List<NameValueInfo>();
-        public List<NameValueInfo> Enemies { get; private set; } = new List<NameValueInfo>();
+        public List<EnemyInfo> Enemies { get; private set; } = new List<EnemyInfo>();
         public List<TameMonsterInfo> TameMonsters { get; private set; } = new List<TameMonsterInfo>();
 
         private readonly Dictionary<uint, NameValueInfo> _unknownNames = new();
@@ -71,14 +71,14 @@ namespace OctopathTraveler
             }
 
             var reader = new ExcelReader(file);
-            reader.AppendList("item", Items);
-            reader.AppendList("character", CharaNames);
-            reader.AppendList("job", Jobs);
-            reader.AppendList("equipment", Equipments);
-            reader.AppendList("country", Countris);
-            reader.AppendList("place", Places);
-            reader.AppendList("enemy_weakness", Enemies);
-            reader.AppendList("tame_monster", TameMonsters);
+            reader.AppendListAndOrderByValue("item", Items);
+            reader.AppendListAndOrderByValue("character", CharaNames);
+            reader.AppendListAndOrderByValue("job", Jobs);
+            reader.AppendListAndOrderByValue("equipment", Equipments);
+            reader.AppendListAndOrderByValue("country", Countris);
+            reader.AppendListAndOrderByValue("place", Places);
+            reader.AppendListAndOrderByValue("enemy_weakness", Enemies);
+            reader.AppendListAndOrderByValue("tame_monster", TameMonsters);
         }
 
         private class ExcelReader
@@ -90,6 +90,12 @@ namespace OctopathTraveler
             {
                 _stream = new MemoryStream(File.ReadAllBytes(path), false);
                 _sheets = new HashSet<string>(MiniExcel.GetSheetNames(_stream));
+            }
+
+            public void AppendListAndOrderByValue<TInfo>(string sheet, List<TInfo> list) where TInfo : NameValueInfo, new()
+            {
+                AppendList(sheet, list);
+                list.Sort((x, y) => x.Value.CompareTo(y.Value));
             }
 
             public void AppendList<TRowParser>(string sheet, List<TRowParser> list) where TRowParser : IRowParser, new()

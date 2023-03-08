@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OctopathTraveler"
         mc:Ignorable="d"
-        Title="About" Height="170" Width="465">
+        Title="About" Height="220" Width="465">
     <Grid>
         <StackPanel>
             <Label Content="Creater : カメムシ"/>
@@ -24,10 +24,21 @@
                 </Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <!--<Label Width="40">HP :</Label>-->
                 <Label Margin="0,0,-6,0">Modifier2 :</Label>
                 <Label MouseDown="LabelModifier2_MouseDown">
                     <TextBlock TextDecorations="Underline">LonelyWindG/OctopathTraveler-SavaDataEditor</TextBlock>
+                </Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="0,0,-6,0">DataSource1 :</Label>
+                <Label MouseDown="LabelDataSource1_MouseDown">
+                    <TextBlock TextDecorations="Underline">Octopath Traveler Resource - Google Sheets</TextBlock>
+                </Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="0,0,-6,0">DataSource2 :</Label>
+                <Label MouseDown="LabelDataSource2_MouseDown">
+                    <TextBlock TextDecorations="Underline">Octopath Traveler : MONSTERS ID LIST - Google Sheets</TextBlock>
                 </Label>
             </StackPanel>
         </StackPanel>

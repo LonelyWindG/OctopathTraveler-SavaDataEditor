@@ -123,6 +123,21 @@
   <data name="BasicHero" xml:space="preserve">
     <value>Hero</value>
   </data>
+  <data name="ItemAccessory1" xml:space="preserve">
+    <value>Accessory1</value>
+  </data>
+  <data name="ItemAccessory2" xml:space="preserve">
+    <value>Accessory2</value>
+  </data>
+  <data name="ItemAxe" xml:space="preserve">
+    <value>Axe</value>
+  </data>
+  <data name="ItemBody" xml:space="preserve">
+    <value>Body</value>
+  </data>
+  <data name="ItemBow" xml:space="preserve">
+    <value>Bow</value>
+  </data>
   <data name="ItemChoiceCancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -135,55 +150,40 @@
   <data name="ItemChoiceTitle" xml:space="preserve">
     <value>Item Selection</value>
   </data>
-  <data name="ItemWeakAccessory1" xml:space="preserve">
-    <value>Accessory1</value>
-  </data>
-  <data name="ItemWeakAccessory2" xml:space="preserve">
-    <value>Accessory2</value>
-  </data>
-  <data name="ItemWeakAxe" xml:space="preserve">
-    <value>Axe</value>
-  </data>
-  <data name="ItemWeakBody" xml:space="preserve">
-    <value>Body</value>
-  </data>
-  <data name="ItemWeakBow" xml:space="preserve">
-    <value>Bow</value>
-  </data>
-  <data name="ItemWeakDagger" xml:space="preserve">
+  <data name="ItemDagger" xml:space="preserve">
     <value>Dagger</value>
   </data>
-  <data name="ItemWeakDark" xml:space="preserve">
+  <data name="ItemDark" xml:space="preserve">
     <value>Dark</value>
   </data>
-  <data name="ItemWeakFire" xml:space="preserve">
+  <data name="ItemFire" xml:space="preserve">
     <value>Fire</value>
   </data>
-  <data name="ItemWeakHead" xml:space="preserve">
+  <data name="ItemHead" xml:space="preserve">
     <value>Head</value>
   </data>
-  <data name="ItemWeakIce" xml:space="preserve">
+  <data name="ItemIce" xml:space="preserve">
     <value>Ice</value>
   </data>
-  <data name="ItemWeakLance" xml:space="preserve">
+  <data name="ItemLance" xml:space="preserve">
     <value>Lance</value>
   </data>
-  <data name="ItemWeakLight" xml:space="preserve">
+  <data name="ItemLight" xml:space="preserve">
     <value>Light</value>
   </data>
-  <data name="ItemWeakRod" xml:space="preserve">
+  <data name="ItemRod" xml:space="preserve">
     <value>Rod</value>
   </data>
-  <data name="ItemWeakShield" xml:space="preserve">
+  <data name="ItemShield" xml:space="preserve">
     <value>Shield</value>
   </data>
-  <data name="ItemWeakSword" xml:space="preserve">
+  <data name="ItemSword" xml:space="preserve">
     <value>Sword</value>
   </data>
-  <data name="ItemWeakThunder" xml:space="preserve">
+  <data name="ItemThunder" xml:space="preserve">
     <value>Thunder</value>
   </data>
-  <data name="ItemWeakWind" xml:space="preserve">
+  <data name="ItemWind" xml:space="preserve">
     <value>Wind</value>
   </data>
   <data name="MainWindowTitle" xml:space="preserve">
@@ -194,6 +194,12 @@
   </data>
   <data name="MenuAbout" xml:space="preserve">
     <value>(_A)bout</value>
+  </data>
+  <data name="MenuData" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="MenuDataWeakProgress" xml:space="preserve">
+    <value>Weakness Completed Progress</value>
   </data>
   <data name="MenuExit" xml:space="preserve">
     <value>(_E)xit</value>
@@ -240,11 +246,14 @@
   <data name="TabItemTameMonster" xml:space="preserve">
     <value>TameMonster</value>
   </data>
+  <data name="TabItemTameMonsterWarning" xml:space="preserve">
+    <value>The monsters selected in the drop down options on this page may not be valid tameable monsters, so please be careful when modifying tamed monsters to avoid damaging your archive.</value>
+  </data>
   <data name="TabItemTreasure" xml:space="preserve">
     <value>TreasureStates</value>
   </data>
   <data name="TabItemWeak" xml:space="preserve">
-    <value>Weak</value>
+    <value>Weakness</value>
   </data>
   <data name="ToolTipOpen" xml:space="preserve">
     <value>Open</value>

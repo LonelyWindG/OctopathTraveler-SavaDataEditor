@@ -3,7 +3,7 @@ using System.Text;
 
 namespace OctopathTraveler
 {
-    class TreasureState
+    class TreasureState : INotifyPropertyChanged
     {
         private string collected;
         private string name;
@@ -29,7 +29,7 @@ namespace OctopathTraveler
 
             var result = sb.ToString().TrimEnd();
             Collected = result;
-            Name = address.ToString();
+            Name = showAddress.ToString();
             ////sorry i'm too lazy to make proper read of txt doctionary, because i only know two location names.
             //switch (address)
             //{

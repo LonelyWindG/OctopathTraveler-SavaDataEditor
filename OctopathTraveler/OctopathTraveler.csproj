@@ -7,12 +7,16 @@
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <ApplicationIcon>Resource\Logo.ico</ApplicationIcon>
+    <AnalysisLevel>6.0</AnalysisLevel>
+    <Nullable>annotations</Nullable>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Resource\Logo.ico" />
@@ -42,11 +46,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Update="Resource\info.xlsx">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    <None Update="info.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resource\info_zh_cn.xlsx">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    <None Update="info_zh_cn.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 </Project>

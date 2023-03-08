@@ -35,7 +35,11 @@ namespace OctopathTraveler
 
             foreach (var address in save.FindAddress("ItemID_", 0))
             {
-                Items.Add(new Item(address));
+                var item = new Item(address);
+                if (item.ID == 0)
+                    continue;
+
+                Items.Add(item);
             }
 
             var gvas = new GVAS(null);
@@ -82,12 +86,14 @@ namespace OctopathTraveler
                 {
                     for (uint bit = 0; bit < 8; bit++)
                     {
-                        var place = new Place(data.Address + size, bit);
-                        NameValueInfo info = Info.Instance().Search(Info.Instance().Places, id);
-                        if (info != null)
+                        if (id < 12)//Ignore the first 12, as these values are all 0
                         {
-                            place.Name = info.Name;
+                            id++;
+                            continue;
                         }
+
+                        var info = Info.Instance().Search(Info.Instance().Places, id, false);
+                        var place = new Place(data.Address + size, bit, info?.Name ?? $"{id}(0x{id:X})({data.Address + size})");
                         Places.Add(place);
                         id++;
                     }
@@ -95,9 +101,16 @@ namespace OctopathTraveler
             }
 
             var treasures = save.FindAddress("TreasureStateArray", 0);
-            int diff = treasures.Count > 0 ? checked((int)treasures[0] - 1257303) : 0;
+
+            //1257303 is the valid starting address for the treasure chest status of STEAM® save data
+            //Refer to the table at https://docs.google.com/spreadsheets/d/1WGN0166crI5IbnJ4QADnLiNHrL2FUr0MVFqmWH7dBRg
+            //Chinese description https://tieba.baidu.com/p/7822253075
+            int diff = treasures.Count > 12 ? checked((int)treasures[12] - 1257303) : 0;
             for (int i = 0; i < treasures.Count; i++)
             {
+                if (i < 12)//Ignore the first 12, as these values are all 0
+                    continue;
+
                 //gvas = new GVAS(null);
                 //gvas.AppendValue(treasures[i]);
                 uint treausreAddress = treasures[i] + 100;
@@ -120,17 +133,18 @@ namespace OctopathTraveler
             uint weaks = save.FindAddress("EnemyInfoData", 0)[0];
             Console.WriteLine(save.FindAddress("IsAnalyse_", 0).Count);
             List<uint> isAnalyseList = save.FindAddress("IsAnalyse_", 0);
-            for (int i1 = 0; i1 < isAnalyseList.Count; i1++)
+
+            var lastEnemy = Info.Instance().Enemies.LastOrDefault();
+            int maxNum = lastEnemy == null ? -1 : (int)lastEnemy.Value;
+            for (int num = 0; num < Math.Min(isAnalyseList.Count, maxNum + 1); num++)
             {
-                if (i1 == 422) break;
-                uint i = isAnalyseList[i1];
-                var weak = new EnemyWeakness(i) { Num = i1 };
-                var info = Info.Instance().Search(Info.Instance().Enemies, checked((uint)i1));
-                if (info != null)
-                {
-                    weak.Name = info.Name;
-                }
-                EnemyWeaknesses.Add(weak);
+                //if (num == 422) break;
+                var info = Info.Instance().Search(Info.Instance().Enemies, checked((uint)num), false) as EnemyInfo;
+                if (info == null || (info.WeaponWeak == 0 && info.MagicWeak == 0))
+                    continue;
+
+                uint i = isAnalyseList[num];
+                EnemyWeaknesses.Add(new EnemyWeakness(i, num, info));
             }
 
             gvas = new GVAS(null);

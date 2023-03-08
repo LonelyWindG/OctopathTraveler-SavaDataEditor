@@ -253,5 +253,67 @@ namespace OctopathTraveler
 			window.ShowDialog();
 			return window.ID;
 		}
-	}
+
+        private void MenuItemWeakProgress_Click(object sender, RoutedEventArgs e)
+        {
+			string text = "Completed : 0/0";
+			if (DataContext != null)
+			{
+                var enermies = ((DataContext)DataContext)?.EnemyWeaknesses;
+				if (enermies != null)
+				{
+                    int count = 0;
+					int uncompletedCount = 0;
+
+                    var builder = new StringBuilder(256);
+                    foreach (var item in enermies)
+                    {
+                        if (item.IsBreakAll)
+                        {
+                            count++;
+						}
+						else
+						{
+							uncompletedCount++;
+							if (uncompletedCount > 20)
+							{
+								if (uncompletedCount == 21)
+                                    builder.AppendLine("more. . .");
+
+								continue;
+                            }
+                            uint value = item.Info.Value;
+							//if (value < 10)
+							//{
+							//	builder.Append("00");
+							//}
+							//else if (value < 100)
+							//{
+							//	builder.Append("0");
+							//}
+							builder.Append(value);
+							builder.Append('\t');
+							builder.AppendLine(item.Info.Name);
+                        }
+                    }
+
+					if (uncompletedCount > 0)
+                    {
+						builder.Insert(0, "\n");
+						builder.Insert(0, uncompletedCount);
+                        builder.Insert(0, "Uncompleted : ");
+                    }
+
+                    builder.Insert(0, "\n");
+					builder.Insert(0, enermies.Count);
+					builder.Insert(0, "/");
+					builder.Insert(0, count);
+					builder.Insert(0, "Completed : ");
+                    text = builder.ToString();
+                }
+            }
+
+            MessageBox.Show(text, Properties.Resources.MenuDataWeakProgress);
+        }
+    }
 }

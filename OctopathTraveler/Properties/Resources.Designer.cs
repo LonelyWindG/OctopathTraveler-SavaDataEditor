@@ -79,6 +79,51 @@ namespace OctopathTraveler.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Accessory1 的本地化字符串。
+        /// </summary>
+        public static string ItemAccessory1 {
+            get {
+                return ResourceManager.GetString("ItemAccessory1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Accessory2 的本地化字符串。
+        /// </summary>
+        public static string ItemAccessory2 {
+            get {
+                return ResourceManager.GetString("ItemAccessory2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Axe 的本地化字符串。
+        /// </summary>
+        public static string ItemAxe {
+            get {
+                return ResourceManager.GetString("ItemAxe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Body 的本地化字符串。
+        /// </summary>
+        public static string ItemBody {
+            get {
+                return ResourceManager.GetString("ItemBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Bow 的本地化字符串。
+        /// </summary>
+        public static string ItemBow {
+            get {
+                return ResourceManager.GetString("ItemBow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Cancel 的本地化字符串。
         /// </summary>
         public static string ItemChoiceCancel {
@@ -115,155 +160,110 @@ namespace OctopathTraveler.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Accessory1 的本地化字符串。
-        /// </summary>
-        public static string ItemWeakAccessory1 {
-            get {
-                return ResourceManager.GetString("ItemWeakAccessory1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Accessory2 的本地化字符串。
-        /// </summary>
-        public static string ItemWeakAccessory2 {
-            get {
-                return ResourceManager.GetString("ItemWeakAccessory2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Axe 的本地化字符串。
-        /// </summary>
-        public static string ItemWeakAxe {
-            get {
-                return ResourceManager.GetString("ItemWeakAxe", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Body 的本地化字符串。
-        /// </summary>
-        public static string ItemWeakBody {
-            get {
-                return ResourceManager.GetString("ItemWeakBody", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Bow 的本地化字符串。
-        /// </summary>
-        public static string ItemWeakBow {
-            get {
-                return ResourceManager.GetString("ItemWeakBow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Dagger 的本地化字符串。
         /// </summary>
-        public static string ItemWeakDagger {
+        public static string ItemDagger {
             get {
-                return ResourceManager.GetString("ItemWeakDagger", resourceCulture);
+                return ResourceManager.GetString("ItemDagger", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Dark 的本地化字符串。
         /// </summary>
-        public static string ItemWeakDark {
+        public static string ItemDark {
             get {
-                return ResourceManager.GetString("ItemWeakDark", resourceCulture);
+                return ResourceManager.GetString("ItemDark", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Fire 的本地化字符串。
         /// </summary>
-        public static string ItemWeakFire {
+        public static string ItemFire {
             get {
-                return ResourceManager.GetString("ItemWeakFire", resourceCulture);
+                return ResourceManager.GetString("ItemFire", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Head 的本地化字符串。
         /// </summary>
-        public static string ItemWeakHead {
+        public static string ItemHead {
             get {
-                return ResourceManager.GetString("ItemWeakHead", resourceCulture);
+                return ResourceManager.GetString("ItemHead", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Ice 的本地化字符串。
         /// </summary>
-        public static string ItemWeakIce {
+        public static string ItemIce {
             get {
-                return ResourceManager.GetString("ItemWeakIce", resourceCulture);
+                return ResourceManager.GetString("ItemIce", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Lance 的本地化字符串。
         /// </summary>
-        public static string ItemWeakLance {
+        public static string ItemLance {
             get {
-                return ResourceManager.GetString("ItemWeakLance", resourceCulture);
+                return ResourceManager.GetString("ItemLance", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Light 的本地化字符串。
         /// </summary>
-        public static string ItemWeakLight {
+        public static string ItemLight {
             get {
-                return ResourceManager.GetString("ItemWeakLight", resourceCulture);
+                return ResourceManager.GetString("ItemLight", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Rod 的本地化字符串。
         /// </summary>
-        public static string ItemWeakRod {
+        public static string ItemRod {
             get {
-                return ResourceManager.GetString("ItemWeakRod", resourceCulture);
+                return ResourceManager.GetString("ItemRod", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Shield 的本地化字符串。
         /// </summary>
-        public static string ItemWeakShield {
+        public static string ItemShield {
             get {
-                return ResourceManager.GetString("ItemWeakShield", resourceCulture);
+                return ResourceManager.GetString("ItemShield", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Sword 的本地化字符串。
         /// </summary>
-        public static string ItemWeakSword {
+        public static string ItemSword {
             get {
-                return ResourceManager.GetString("ItemWeakSword", resourceCulture);
+                return ResourceManager.GetString("ItemSword", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Thunder 的本地化字符串。
         /// </summary>
-        public static string ItemWeakThunder {
+        public static string ItemThunder {
             get {
-                return ResourceManager.GetString("ItemWeakThunder", resourceCulture);
+                return ResourceManager.GetString("ItemThunder", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Wind 的本地化字符串。
         /// </summary>
-        public static string ItemWeakWind {
+        public static string ItemWind {
             get {
-                return ResourceManager.GetString("ItemWeakWind", resourceCulture);
+                return ResourceManager.GetString("ItemWind", resourceCulture);
             }
         }
         
@@ -291,6 +291,24 @@ namespace OctopathTraveler.Properties {
         public static string MenuAbout {
             get {
                 return ResourceManager.GetString("MenuAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Data 的本地化字符串。
+        /// </summary>
+        public static string MenuData {
+            get {
+                return ResourceManager.GetString("MenuData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Weakness Completed Progress 的本地化字符串。
+        /// </summary>
+        public static string MenuDataWeakProgress {
+            get {
+                return ResourceManager.GetString("MenuDataWeakProgress", resourceCulture);
             }
         }
         
@@ -430,6 +448,15 @@ namespace OctopathTraveler.Properties {
         }
         
         /// <summary>
+        ///   查找类似 The monsters selected in the drop down options on this page may not be valid tameable monsters, so please be careful when modifying tamed monsters to avoid damaging your archive. 的本地化字符串。
+        /// </summary>
+        public static string TabItemTameMonsterWarning {
+            get {
+                return ResourceManager.GetString("TabItemTameMonsterWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 TreasureStates 的本地化字符串。
         /// </summary>
         public static string TabItemTreasure {
@@ -439,7 +466,7 @@ namespace OctopathTraveler.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Weak 的本地化字符串。
+        ///   查找类似 Weakness 的本地化字符串。
         /// </summary>
         public static string TabItemWeak {
             get {

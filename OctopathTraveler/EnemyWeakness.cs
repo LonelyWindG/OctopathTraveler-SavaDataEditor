@@ -1,23 +1,61 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace OctopathTraveler
 {
     class EnemyWeakness : INotifyPropertyChanged
     {
+        private const int WeakNumBit = 6;
+
+        private static readonly string[] WeaponWeakProps = new string[WeakNumBit]
+        {
+            nameof(Sword), nameof(Lance), nameof(Dagger), nameof(Axe), nameof(Bow), nameof(Rod)
+        };
+
+        private static readonly string[] MagicWeakProps = new string[WeakNumBit]
+        {
+            nameof(Fire), nameof(Ice), nameof(Thunder), nameof(Wind), nameof(Light), nameof(Dark)
+        };
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly uint mWeaponAddress;
         private readonly uint mMagicAddress;
-        private int num;
 
-        public string Name { get; set; }
+        public int Num { get; }
 
-        public EnemyWeakness(uint address)
+        public EnemyInfo Info { get; }
+
+        public EnemyWeakness(uint address, int num, EnemyInfo enermyInfo)
         {
             var gvas = new GVAS(null);
             gvas.AppendValue(SaveData.Instance().FindAddress("WeaknessOpen_", address)[0]);
             mWeaponAddress = gvas.Key("WeaknessOpen").Address;
             mMagicAddress = mWeaponAddress + 1;
+
+            Num = num;
+            Info = enermyInfo ?? throw new ArgumentNullException(nameof(enermyInfo));
+        }
+
+        public bool IsBreakAll
+        {
+            get
+            {
+                bool isBreakWeapon = SaveData.Instance().ReadNumber(mWeaponAddress, 1) == Info.WeaponWeak;
+                return isBreakWeapon && SaveData.Instance().ReadNumber(mMagicAddress, 1) == Info.MagicWeak;
+            }
+            set
+            {
+                SaveData.Instance().WriteNumber(mWeaponAddress, 1, value ? Info.WeaponWeak : 0);
+                SaveData.Instance().WriteNumber(mMagicAddress, 1, value ? Info.MagicWeak : 0);
+
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBreakAll)));
+                for (int i = 0; i < WeakNumBit; i++)
+                {
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(WeaponWeakProps[i]));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(MagicWeakProps[i]));
+                }
+            }
         }
 
         public bool Sword
@@ -25,8 +63,7 @@ namespace OctopathTraveler
             get { return SaveData.Instance().ReadBit(mWeaponAddress, 0); }
             set
             {
-                SaveData.Instance().WriteBit(mWeaponAddress, 0, value);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Sword)));
+                SetWeaponWeakProp(0, value);
             }
         }
 
@@ -35,8 +72,7 @@ namespace OctopathTraveler
             get { return SaveData.Instance().ReadBit(mWeaponAddress, 1); }
             set
             {
-                SaveData.Instance().WriteBit(mWeaponAddress, 1, value);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Lance)));
+                SetWeaponWeakProp(1, value);
             }
         }
 
@@ -45,8 +81,7 @@ namespace OctopathTraveler
             get { return SaveData.Instance().ReadBit(mWeaponAddress, 2); }
             set
             {
-                SaveData.Instance().WriteBit(mWeaponAddress, 2, value);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Dagger)));
+                SetWeaponWeakProp(2, value);
             }
         }
 
@@ -55,8 +90,7 @@ namespace OctopathTraveler
             get { return SaveData.Instance().ReadBit(mWeaponAddress, 3); }
             set
             {
-                SaveData.Instance().WriteBit(mWeaponAddress, 3, value);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Axe)));
+                SetWeaponWeakProp(3, value);
             }
         }
 
@@ -65,8 +99,7 @@ namespace OctopathTraveler
             get { return SaveData.Instance().ReadBit(mWeaponAddress, 4); }
             set
             {
-                SaveData.Instance().WriteBit(mWeaponAddress, 4, value);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Bow)));
+                SetWeaponWeakProp(4, value);
             }
         }
 
@@ -75,8 +108,7 @@ namespace OctopathTraveler
             get { return SaveData.Instance().ReadBit(mWeaponAddress, 5); }
             set
             {
-                SaveData.Instance().WriteBit(mWeaponAddress, 5, value);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Rod)));
+                SetWeaponWeakProp(5, value);
             }
         }
 
@@ -85,8 +117,7 @@ namespace OctopathTraveler
             get { return SaveData.Instance().ReadBit(mMagicAddress, 0); }
             set
             {
-                SaveData.Instance().WriteBit(mMagicAddress, 0, value);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Fire)));
+                SetMagicWeakProp(0, value);
             }
         }
 
@@ -95,8 +126,7 @@ namespace OctopathTraveler
             get { return SaveData.Instance().ReadBit(mMagicAddress, 1); }
             set
             {
-                SaveData.Instance().WriteBit(mMagicAddress, 1, value);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Ice)));
+                SetMagicWeakProp(1, value);
             }
         }
 
@@ -105,8 +135,7 @@ namespace OctopathTraveler
             get { return SaveData.Instance().ReadBit(mMagicAddress, 2); }
             set
             {
-                SaveData.Instance().WriteBit(mMagicAddress, 2, value);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Thunder)));
+                SetMagicWeakProp(2, value);
             }
         }
 
@@ -115,8 +144,7 @@ namespace OctopathTraveler
             get { return SaveData.Instance().ReadBit(mMagicAddress, 3); }
             set
             {
-                SaveData.Instance().WriteBit(mMagicAddress, 3, value);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Wind)));
+                SetMagicWeakProp(3, value);
             }
         }
 
@@ -125,8 +153,7 @@ namespace OctopathTraveler
             get { return SaveData.Instance().ReadBit(mMagicAddress, 4); }
             set
             {
-                SaveData.Instance().WriteBit(mMagicAddress, 4, value);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Light)));
+                SetMagicWeakProp(4, value);
             }
         }
 
@@ -135,19 +162,22 @@ namespace OctopathTraveler
             get { return SaveData.Instance().ReadBit(mMagicAddress, 5); }
             set
             {
-                SaveData.Instance().WriteBit(mMagicAddress, 5, value);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Dark)));
+                SetMagicWeakProp(5, value);
             }
         }
 
-        public int Num
+        private void SetWeaponWeakProp(uint bit, bool value)
         {
-            get => num;
-            set
-            {
-                num = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Num)));
-            }
+            SaveData.Instance().WriteBit(mWeaponAddress, bit, value);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(WeaponWeakProps[(int)bit]));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBreakAll)));
+        }
+
+        private void SetMagicWeakProp(uint bit, bool value)
+        {
+            SaveData.Instance().WriteBit(mMagicAddress, bit, value);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(MagicWeakProps[(int)bit]));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBreakAll)));
         }
     }
 }

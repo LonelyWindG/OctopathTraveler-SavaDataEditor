@@ -135,54 +135,6 @@
   <data name="ItemChoiceTitle" xml:space="preserve">
     <value>アイテム選択</value>
   </data>
-  <data name="ItemWeakAccessory1" xml:space="preserve">
-    <value>Accessory1</value>
-  </data>
-  <data name="ItemWeakAccessory2" xml:space="preserve">
-    <value>Accessory2</value>
-  </data>
-  <data name="ItemWeakAxe" xml:space="preserve">
-    <value>Axe</value>
-  </data>
-  <data name="ItemWeakBody" xml:space="preserve">
-    <value>Body</value>
-  </data>
-  <data name="ItemWeakBow" xml:space="preserve">
-    <value>Bow</value>
-  </data>
-  <data name="ItemWeakDagger" xml:space="preserve">
-    <value>Dagger</value>
-  </data>
-  <data name="ItemWeakDark" xml:space="preserve">
-    <value>Dark</value>
-  </data>
-  <data name="ItemWeakFire" xml:space="preserve">
-    <value>Fire</value>
-  </data>
-  <data name="ItemWeakHead" xml:space="preserve">
-    <value>Head</value>
-  </data>
-  <data name="ItemWeakIce" xml:space="preserve">
-    <value>Ice</value>
-  </data>
-  <data name="ItemWeakLance" xml:space="preserve">
-    <value>Lance</value>
-  </data>
-  <data name="ItemWeakLight" xml:space="preserve">
-    <value>Light</value>
-  </data>
-  <data name="ItemWeakRod" xml:space="preserve">
-    <value>Rod</value>
-  </data>
-  <data name="ItemWeakShield" xml:space="preserve">
-    <value>Shield</value>
-  </data>
-  <data name="ItemWeakSword" xml:space="preserve">
-    <value>Sword</value>
-  </data>
-  <data name="ItemWeakThunder" xml:space="preserve">
-    <value>Thunder</value>
-  </data>
   <data name="ItemWeakWind" xml:space="preserve">
     <value>Wind</value>
   </data>
