@@ -11,7 +11,7 @@
 
 # 概要
 
-八方旅人存档编辑器(适用于Steam, Xbox PC, Nintendo Switch), [Release]下载(https://github.com/LonelyWindG/OctopathTraveler-SavaDataEditor/release)
+八方旅人存档编辑器(适用于Steam, Xbox PC, Nintendo Switch), [Release](https://github.com/LonelyWindG/OctopathTraveler-SavaDataEditor/release)下载
 
 # 游戏官网
 
