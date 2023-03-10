@@ -247,7 +247,7 @@
     <value>盾</value>
   </data>
   <data name="TabItemTreasure" xml:space="preserve">
-    <value>宝箱&amp;隐藏道具状态</value>
+    <value>宝箱&amp;隐藏道具地点</value>
   </data>
   <data name="ToolTipSave" xml:space="preserve">
     <value>保存</value>
@@ -255,10 +255,20 @@
   <data name="TabItemTameMonsterWarning" xml:space="preserve">
     <value>该页面下拉选项中可选的魔物可能不是有效的可捕获魔物, 请慎重修改已捕获的魔物, 避免损坏您的存档。</value>
   </data>
-  <data name="MenuDataWeakProgress" xml:space="preserve">
-    <value>怪物弱点完成进度</value>
+  <data name="TreasureStatesChest" xml:space="preserve">
+    <value>宝箱</value>
   </data>
-  <data name="MenuData" xml:space="preserve">
-    <value>数据</value>
+  <data name="TreasureStatesHiddenItem" xml:space="preserve">
+    <value>隐藏道具</value>
+  </data>
+  <data name="TreasureStatesSummation" xml:space="preserve">
+    <value>总和</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="InfoExcel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resource\info_zh_cn.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="MenuExportInfoExcel" xml:space="preserve">
+    <value>导出嵌入的数据Excel(_E)...</value>
   </data>
 </root>

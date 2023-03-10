@@ -1,62 +1,58 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Text;
 
 namespace OctopathTraveler
 {
     class TreasureState : INotifyPropertyChanged
     {
-        private string collected;
-        private string name;
+        private uint summation;
+        private uint chest;
+        private uint hiddenItem;
+        private string value;
+
+        //I don't know how to make the CheckBox control read-only, so I can only keep an empty set method
+        public bool IsCollectAll { get => summation == Info.Summation; set { } }
+        public bool IsCollectChest { get => chest == Info.Chest; set { } }
+        public bool IsCollectHiddenItem { get => hiddenItem == Info.HiddenItem; set { } }
+
+        public string SummationProgress => $"{summation}/{Info.Summation}";
+        public string ChestProgress => $"{chest}/{Info.Chest}";
+        public string HiddenItemProgress => $"{hiddenItem}/{Info.HiddenItem}";
+
+
+        public uint Summation => summation;
+        public uint Chest => chest;
+        public uint HiddenItem => hiddenItem;
+        public string Value => value;
+
+        public TreasureStateInfo Info { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public TreasureState(uint address, uint showAddress)
+        public TreasureState(uint address, TreasureStateInfo info)
         {
-            StringBuilder sb = new StringBuilder();
-            uint readValue = 0;
-            uint i = 0;
-            do
+            //var sb = new StringBuilder();
+            address += 3;//Ignore the first three, because these values are all 0
+
+            uint showValue = 0;
+            for (uint i = 0; i < info.Summation; i++)
             {
-                readValue = SaveData.Instance().ReadNumber(address + i, 1);
-                if (readValue != 5)
+                uint readValue = SaveData.Instance().ReadNumber(address + i, 1);
+                showValue = checked((showValue << 1) + readValue);
+                if (readValue != 0)
                 {
-                    sb.Append(readValue);
-                    sb.Append(' ');
+                    summation++;
+                    if (i < info.Chest)
+                        chest++;
+                    else
+                        hiddenItem++;
+
                 }
-                i++;
             }
-            while (readValue != 5);
 
-            var result = sb.ToString().TrimEnd();
-            Collected = result;
-            Name = showAddress.ToString();
-            ////sorry i'm too lazy to make proper read of txt doctionary, because i only know two location names.
-            //switch (address)
-            //{
-            //    case 1261893: Name = "Lizardmen's Den"; break;
-            //    default:
-            //        break;
-            //}
-        }
-
-        public string Name
-        {
-            get => name;
-            set
-            {
-                name = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
-            }
-        }
-
-        public string Collected
-        {
-            get => collected;
-            set
-            {
-                collected = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Collected)));
-            }
+            value = Convert.ToString(showValue, 2).PadLeft((int)info.Summation, '0'); //sb.ToString().TrimEnd();
+            Info = info;
         }
     }
 }

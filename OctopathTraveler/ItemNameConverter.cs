@@ -12,7 +12,7 @@ namespace OctopathTraveler
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			return Info.Instance().Search(Info.Instance().Items, (uint)value)?.Name;
+			return Info.GetNameOrID2Hex(Info.Instance().Items, (uint)value);
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

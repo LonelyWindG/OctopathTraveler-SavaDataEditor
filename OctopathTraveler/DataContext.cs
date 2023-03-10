@@ -92,8 +92,8 @@ namespace OctopathTraveler
                             continue;
                         }
 
-                        var info = Info.Instance().Search(Info.Instance().Places, id, false);
-                        var place = new Place(data.Address + size, bit, info?.Name ?? $"{id}(0x{id:X})({data.Address + size})");
+                        var info = Info.Search(Info.Instance().Places, id);
+                        var place = new Place(data.Address + size, bit, info?.Name ?? $"{id}(0x{id:X})({data.Address + size + bit})");
                         Places.Add(place);
                         id++;
                     }
@@ -102,7 +102,7 @@ namespace OctopathTraveler
 
             var treasures = save.FindAddress("TreasureStateArray", 0);
 
-            //1257303 is the valid starting address for the treasure chest status of STEAM® save data
+            //1257303 is the valid starting address for the treasure status of STEAM® save data
             //Refer to the table at https://docs.google.com/spreadsheets/d/1WGN0166crI5IbnJ4QADnLiNHrL2FUr0MVFqmWH7dBRg
             //Chinese description https://tieba.baidu.com/p/7822253075
             int diff = treasures.Count > 12 ? checked((int)treasures[12] - 1257303) : 0;
@@ -113,11 +113,15 @@ namespace OctopathTraveler
 
                 //gvas = new GVAS(null);
                 //gvas.AppendValue(treasures[i]);
+                uint tid = checked((uint)((int)treasures[i] - diff));
+                var info = Info.Search(Info.Instance().TreasureStates, tid);
+                if (info == null)
+                    continue;
+
                 uint treausreAddress = treasures[i] + 100;
-                uint showAddress = checked((uint)((int)treasures[i] - diff));
 
                 //var data = gvas.Key("TreasureStateArray_" + i);
-                var treasure = new TreasureState(treausreAddress, showAddress);
+                var treasure = new TreasureState(treausreAddress, info);
                 TreasureStates.Add(treasure);
             }
 
@@ -139,8 +143,8 @@ namespace OctopathTraveler
             for (int num = 0; num < Math.Min(isAnalyseList.Count, maxNum + 1); num++)
             {
                 //if (num == 422) break;
-                var info = Info.Instance().Search(Info.Instance().Enemies, checked((uint)num), false) as EnemyInfo;
-                if (info == null || (info.WeaponWeak == 0 && info.MagicWeak == 0))
+                var info = Info.Search(Info.Instance().Enemies, checked((uint)num));
+                if (info == null)
                     continue;
 
                 uint i = isAnalyseList[num];

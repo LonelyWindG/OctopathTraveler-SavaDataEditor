@@ -135,9 +135,6 @@
   <data name="ItemChoiceTitle" xml:space="preserve">
     <value>アイテム選択</value>
   </data>
-  <data name="ItemWeakWind" xml:space="preserve">
-    <value>Wind</value>
-  </data>
   <data name="MainWindowTitle" xml:space="preserve">
     <value>OCTOPATH TRAVELER セーブデータ改造(Nintendo Switch)</value>
   </data>

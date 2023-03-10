@@ -48,7 +48,7 @@ namespace OctopathTraveler
                 return false;
 
             SetWeak(ReadWeakNum(row.C), ReadWeakNum(row.D));
-            return true;
+            return WeaponWeak != 0 || MagicWeak != 0;
         }
 
         private static uint ReadWeakNum(dynamic num)

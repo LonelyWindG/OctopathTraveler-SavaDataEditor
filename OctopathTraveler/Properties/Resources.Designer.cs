@@ -79,6 +79,16 @@ namespace OctopathTraveler.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        public static byte[] InfoExcel {
+            get {
+                object obj = ResourceManager.GetObject("InfoExcel", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Accessory1 的本地化字符串。
         /// </summary>
         public static string ItemAccessory1 {
@@ -295,29 +305,20 @@ namespace OctopathTraveler.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Data 的本地化字符串。
-        /// </summary>
-        public static string MenuData {
-            get {
-                return ResourceManager.GetString("MenuData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Weakness Completed Progress 的本地化字符串。
-        /// </summary>
-        public static string MenuDataWeakProgress {
-            get {
-                return ResourceManager.GetString("MenuDataWeakProgress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 (_E)xit 的本地化字符串。
         /// </summary>
         public static string MenuExit {
             get {
                 return ResourceManager.GetString("MenuExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 (_E)xport Embedded Info Excel... 的本地化字符串。
+        /// </summary>
+        public static string MenuExportInfoExcel {
+            get {
+                return ResourceManager.GetString("MenuExportInfoExcel", resourceCulture);
             }
         }
         
@@ -489,6 +490,33 @@ namespace OctopathTraveler.Properties {
         public static string ToolTipSave {
             get {
                 return ResourceManager.GetString("ToolTipSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Chest 的本地化字符串。
+        /// </summary>
+        public static string TreasureStatesChest {
+            get {
+                return ResourceManager.GetString("TreasureStatesChest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 HiddenItem 的本地化字符串。
+        /// </summary>
+        public static string TreasureStatesHiddenItem {
+            get {
+                return ResourceManager.GetString("TreasureStatesHiddenItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Summation 的本地化字符串。
+        /// </summary>
+        public static string TreasureStatesSummation {
+            get {
+                return ResourceManager.GetString("TreasureStatesSummation", resourceCulture);
             }
         }
     }

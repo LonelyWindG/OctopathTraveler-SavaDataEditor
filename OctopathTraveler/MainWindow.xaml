@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:OctopathTraveler"
         xmlns:properties="clr-namespace:OctopathTraveler.Properties"
         mc:Ignorable="d"
-        Title="{x:Static properties:Resources.MainWindowTitle}" Height="650" Width="900"
+        Title="{x:Static properties:Resources.MainWindowTitle}" Height="650" Width="800"
         WindowStartupLocation="CenterScreen"
         AllowDrop="True" Drop="Window_Drop" PreviewDragOver="Window_PreviewDragOver">
+    
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
@@ -16,11 +17,9 @@
                     <MenuItem Header="{x:Static properties:Resources.MenuFileOpen}" Click="MenuItemFileOpen_Click"/>
                     <MenuItem Header="{x:Static properties:Resources.MenuFileSave}" Click="MenuItemFileSave_Click"/>
                     <MenuItem Header="{x:Static properties:Resources.MenuFileSaveAs}" Click="MenuItemFileSaveAs_Click"/>
+                    <MenuItem Header="{x:Static properties:Resources.MenuExportInfoExcel}" Click="MenuItemExportInfoExcel_Click"/>
                     <Separator/>
                     <MenuItem Header="{x:Static properties:Resources.MenuExit}" Click="MenuItemExit_Click"/>
-                </MenuItem>
-                <MenuItem Header="{x:Static properties:Resources.MenuData}">
-                    <MenuItem Header="{x:Static properties:Resources.MenuDataWeakProgress}" Click="MenuItemWeakProgress_Click"/>
                 </MenuItem>
                 <MenuItem Header="{x:Static properties:Resources.MenuAbout}" Click="MenuItemAbout_Click"/>
             </Menu>
@@ -28,9 +27,10 @@
                 <Button Width="32" Height="32" Click="ToolBarFileOpen_Click" ToolTip="{x:Static properties:Resources.ToolTipOpen}">
                     <Image Source="{StaticResource Open}"/>
                 </Button>
-                <Button Width="32" Height="32" Click="ToolBarFileSave_Click" ToolTip="{x:Static properties:Resources.ToolTipSave}">
+                <Button Name="TopBar_ButtonSave" Width="32" Height="32" Click="ToolBarFileSave_Click" ToolTip="{x:Static properties:Resources.ToolTipSave}">
                     <Image Source="{StaticResource Save}"/>
                 </Button>
+                <Label Name="TopBar_LoadedInfoFile" VerticalAlignment="Center"/>
             </ToolBar>
             <TabControl>
                 <TabItem Header="{x:Static properties:Resources.TabItemBasic}">
@@ -251,41 +251,162 @@
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="{x:Static properties:Resources.TabItemWeak}">
-                    <ListBox ItemsSource="{Binding EnemyWeaknesses}">
+                    <ListView ItemsSource="{Binding EnemyWeaknesses}">
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="False">
+                                <GridViewColumn Width="65">
+                                    <GridViewColumnHeader Click="MenuItemWeakProgress_Click">
+                                        <TextBlock Text="ID" FontWeight="Bold"/>
+                                        <GridViewColumnHeader.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Name="MenuItemWeakAll" Header="All" Click="MenuItemWeakAll_Click"/>
+                                                <MenuItem Name="MenuItemWeakCompleted" Header="Completed"  Click="MenuItemWeakCompleted_Click"/>
+                                                <MenuItem Name="MenuItemWeakUncompleted" Header="Uncompleted"  Click="MenuItemWeakUncompleted_Click"/>
+                                            </ContextMenu>
+                                        </GridViewColumnHeader.ContextMenu>
+                                    </GridViewColumnHeader>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Content="{Binding Info.Value}" IsChecked="{Binding IsBreakAll}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Info.Name}" Header="Name" Width="180"/>
+                                <GridViewColumn Header="{x:Static properties:Resources.ItemSword}" Width="42">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Sword}" IsEnabled="{Binding Info.IsEnableSword}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.ItemLance}" Width="42">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Lance}" IsEnabled="{Binding Info.IsEnableLance}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.ItemDagger}" Width="42">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Dagger}" IsEnabled="{Binding Info.IsEnableDagger}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.ItemAxe}" Width="42">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Axe}" IsEnabled="{Binding Info.IsEnableAxe}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.ItemBow}" Width="42">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Bow}" IsEnabled="{Binding Info.IsEnableBow}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.ItemRod}" Width="42">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Rod}" IsEnabled="{Binding Info.IsEnableRod}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.ItemFire}" Width="42">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Fire}" IsEnabled="{Binding Info.IsEnableFire}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.ItemIce}" Width="42">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Ice}" IsEnabled="{Binding Info.IsEnableIce}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.ItemThunder}" Width="42">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Thunder}" IsEnabled="{Binding Info.IsEnableThunder}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.ItemWind}" Width="42">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Wind}" IsEnabled="{Binding Info.IsEnableWind}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.ItemLight}" Width="42">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Light}" IsEnabled="{Binding Info.IsEnableLight}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.ItemDark}" Width="42">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Dark}" IsEnabled="{Binding Info.IsEnableDark}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <!--<ListBox ItemsSource="{Binding EnemyWeaknesses}"
+                             VirtualizingStackPanel.VirtualizationMode="Recycling"  VirtualizingStackPanel.IsVirtualizing="True">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsBreakAll}"/>
-                                    <Label Content="{Binding Num}" Width="35"/>
-                                    <Label Content="{Binding Info.Name}" Width="200"/>
-                                    <Label Content="{x:Static properties:Resources.ItemSword}" Margin="8,0,0,0"/>
-                                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding Sword}" IsEnabled="{Binding Info.IsEnableSword}"/>
-                                    <Label Content="{x:Static properties:Resources.ItemLance}" Margin="8,0,0,0"/>
-                                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding Lance}" IsEnabled="{Binding Info.IsEnableLance}"/>
-                                    <Label Content="{x:Static properties:Resources.ItemDagger}" Margin="8,0,0,0"/>
-                                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding Dagger}" IsEnabled="{Binding Info.IsEnableDagger}"/>
-                                    <Label Content="{x:Static properties:Resources.ItemAxe}" Margin="8,0,0,0"/>
-                                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding Axe}" IsEnabled="{Binding Info.IsEnableAxe}"/>
-                                    <Label Content="{x:Static properties:Resources.ItemBow}" Margin="8,0,0,0"/>
-                                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding Bow}" IsEnabled="{Binding Info.IsEnableBow}"/>
-                                    <Label Content="{x:Static properties:Resources.ItemRod}" Margin="8,0,0,0"/>
-                                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding Rod}" IsEnabled="{Binding Info.IsEnableRod}"/>
-                                    <Label Content="{x:Static properties:Resources.ItemFire}" Margin="8,0,0,0"/>
-                                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding Fire}" IsEnabled="{Binding Info.IsEnableFire}"/>
-                                    <Label Content="{x:Static properties:Resources.ItemIce}" Margin="8,0,0,0"/>
-                                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding Ice}" IsEnabled="{Binding Info.IsEnableIce}"/>
-                                    <Label Content="{x:Static properties:Resources.ItemThunder}" Margin="8,0,0,0"/>
-                                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding Thunder}" IsEnabled="{Binding Info.IsEnableThunder}"/>
-                                    <Label Content="{x:Static properties:Resources.ItemWind}" Margin="8,0,0,0"/>
-                                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding Wind}" IsEnabled="{Binding Info.IsEnableWind}"/>
-                                    <Label Content="{x:Static properties:Resources.ItemLight}" Margin="8,0,0,0"/>
-                                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding Light}" IsEnabled="{Binding Info.IsEnableLight}"/>
-                                    <Label Content="{x:Static properties:Resources.ItemDark}" Margin="8,0,0,0"/>
-                                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding Dark}" IsEnabled="{Binding Info.IsEnableDark}"/>
-                                </StackPanel>
+                                <VirtualizingStackPanel Orientation="Horizontal" VirtualizationMode="Recycling" >
+                                    <CheckBox Content="{Binding Num}" VerticalAlignment="Center"   Width="45"
+                                              IsChecked="{Binding IsBreakAll}"/>
+                                    <Label Content="{Binding Info.Name}" Width="165"/>
+                                    <CheckBox Content="{x:Static properties:Resources.ItemSword}" 
+                                              Margin="15,0,0,0" VerticalAlignment="Center" 
+                                              IsChecked="{Binding Sword}" IsEnabled="{Binding Info.IsEnableSword}"/>
+                                    <CheckBox Content="{x:Static properties:Resources.ItemLance}" 
+                                              Margin="15,0,0,0"  VerticalAlignment="Center" 
+                                              IsChecked="{Binding Lance}" IsEnabled="{Binding Info.IsEnableLance}"/>
+                                    <CheckBox Content="{x:Static properties:Resources.ItemDagger}" 
+                                              Margin="15,0,0,0"  VerticalAlignment="Center" 
+                                              IsChecked="{Binding Dagger}" IsEnabled="{Binding Info.IsEnableDagger}"/>
+                                    <CheckBox Content="{x:Static properties:Resources.ItemAxe}" 
+                                              Margin="15,0,0,0"  VerticalAlignment="Center" 
+                                              IsChecked="{Binding Axe}" IsEnabled="{Binding Info.IsEnableAxe}"/>
+                                    <CheckBox Content="{x:Static properties:Resources.ItemBow}" 
+                                              Margin="15,0,0,0"  VerticalAlignment="Center" 
+                                              IsChecked="{Binding Bow}" IsEnabled="{Binding Info.IsEnableBow}"/>
+                                    <CheckBox Content="{x:Static properties:Resources.ItemRod}" 
+                                              Margin="15,0,0,0"  VerticalAlignment="Center" 
+                                              IsChecked="{Binding Rod}" IsEnabled="{Binding Info.IsEnableRod}"/>
+                                    <CheckBox Content="{x:Static properties:Resources.ItemFire}" 
+                                              Margin="15,0,0,0"  VerticalAlignment="Center" 
+                                              IsChecked="{Binding Fire}" IsEnabled="{Binding Info.IsEnableFire}"/>
+                                    <CheckBox Content="{x:Static properties:Resources.ItemIce}" 
+                                              Margin="15,0,0,0"  VerticalAlignment="Center" 
+                                              IsChecked="{Binding Ice}" IsEnabled="{Binding Info.IsEnableIce}"/>
+                                    <CheckBox Content="{x:Static properties:Resources.ItemThunder}" 
+                                              Margin="15,0,0,0"  VerticalAlignment="Center" 
+                                              IsChecked="{Binding Thunder}" IsEnabled="{Binding Info.IsEnableThunder}"/>
+                                    <CheckBox Content="{x:Static properties:Resources.ItemWind}" 
+                                              Margin="15,0,0,0"  VerticalAlignment="Center" 
+                                              IsChecked="{Binding Wind}" IsEnabled="{Binding Info.IsEnableWind}"/>
+                                    <CheckBox Content="{x:Static properties:Resources.ItemLight}" 
+                                              Margin="15,0,0,0"  VerticalAlignment="Center" 
+                                              IsChecked="{Binding Light}" IsEnabled="{Binding Info.IsEnableLight}"/>
+                                    <CheckBox Content="{x:Static properties:Resources.ItemDark}" 
+                                              Margin="15,0,0,0"  VerticalAlignment="Center" 
+                                              IsChecked="{Binding Dark}" IsEnabled="{Binding Info.IsEnableDark}"/>
+                                </VirtualizingStackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
-                    </ListBox>
+                    </ListBox>-->
                 </TabItem>
                 <TabItem Header="{x:Static properties:Resources.TabItemParty}">
                     <Grid>
@@ -343,18 +464,74 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="{x:Static properties:Resources.TabItemTreasure}">
-                    <ListBox ItemsSource="{Binding TreasureStates}">
+                    <ListView ItemsSource="{Binding TreasureStates}">
+                        <ListView.Resources>
+                            <local:Num2VisibilityConverter x:Key="Num2VisibilityConverter"/>
+                        </ListView.Resources>
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="False">
+                                <GridViewColumn DisplayMemberBinding="{Binding Info.Value}" Header="ID" Width="65"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Info.Name}" Header="Name" Width="220"/>
+                                <GridViewColumn Width="85">
+                                    <GridViewColumnHeader Click="MenuItemTreasureStateProgress_Click">
+                                        <TextBlock Text="{x:Static properties:Resources.TreasureStatesSummation}" FontWeight="Bold"/>
+                                        <GridViewColumnHeader.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Name="MenuItemTreasureStateAll" Header="All" Click="MenuItemTreasureStateAll_Click"/>
+                                                <MenuItem Name="MenuItemTreasureStateCompleted" Header="Completed"  Click="MenuItemTreasureStateCompleted_Click"/>
+                                                <MenuItem Name="MenuItemTreasureStateUncompleted" Header="Uncompleted"  Click="MenuItemTreasureStateUncompleted_Click"/>
+                                            </ContextMenu>
+                                        </GridViewColumnHeader.ContextMenu>
+                                    </GridViewColumnHeader>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Content="{Binding SummationProgress}" 
+                                                      IsChecked="{Binding IsCollectAll}" IsEnabled="False"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.TreasureStatesChest}" Width="85">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Content="{Binding ChestProgress}" IsChecked="{Binding IsCollectChest}" IsEnabled="False"
+                                                      Visibility="{Binding Info.Chest, Converter={StaticResource Num2VisibilityConverter}}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="{x:Static properties:Resources.TreasureStatesHiddenItem}" Width="85">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Content="{Binding HiddenItemProgress}" IsChecked="{Binding IsCollectHiddenItem}" IsEnabled="False"
+                                                      Visibility="{Binding Info.HiddenItem, Converter={StaticResource Num2VisibilityConverter}}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="VALUE" Width="165"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <!--<ListBox ItemsSource="{Binding TreasureStates}" 
+                             VirtualizingStackPanel.VirtualizationMode="Recycling"  VirtualizingStackPanel.IsVirtualizing="True">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Content="{Binding Name}"/>
-                                    <Label Content="" Width="200"/>
-                                    <Label Content="State"/>
-                                    <Label Content="{Binding Collected}"/>
-                                </StackPanel>
+                                <VirtualizingStackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Info.Value}" Width="80"/>
+                                    <Label Content="{Binding Info.Name}" Width="220"/>
+                                    <CheckBox Content="{x:Static properties:Resources.TreasureStatesSummation}" VerticalAlignment="Center" 
+                                              IsChecked="{Binding IsCollectAll}" IsEnabled="False"/>
+                                    <Label Content="{Binding SummationProgress}" Width="50"/>
+                                    <CheckBox Content="{x:Static properties:Resources.TreasureStatesChest}" VerticalAlignment="Center" 
+                                              IsChecked="{Binding IsCollectChest}" IsEnabled="False"/>
+                                    <Label Content="{Binding ChestProgress}" Width="50"/>
+                                    <CheckBox Content="{x:Static properties:Resources.TreasureStatesHiddenItem}" VerticalAlignment="Center" 
+                                              IsChecked="{Binding IsCollectHiddenItem}" IsEnabled="False"/>
+                                    <Label Content="{Binding HiddenItemProgress}" Width="50"/>
+                                    <Label Content="VALUE"/>
+                                    <Label Content="{Binding Value}"/>
+                                </VirtualizingStackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
-                    </ListBox>
+                    </ListBox>-->
                 </TabItem>
             </TabControl>
         </DockPanel>

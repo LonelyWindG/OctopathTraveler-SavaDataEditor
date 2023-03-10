@@ -3,11 +3,14 @@ using System.Globalization;
 using System.IO;
 using System.Windows;
 using MiniExcelLibs;
+using OctopathTraveler.Properties;
 
 namespace OctopathTraveler
 {
     class Info
     {
+        public static string LoadedInfoFile { get; private set; }
+
         private static Info mThis;
         public List<NameValueInfo> Items { get; private set; } = new List<NameValueInfo>();
         public List<NameValueInfo> CharaNames { get; private set; } = new List<NameValueInfo>();
@@ -17,8 +20,7 @@ namespace OctopathTraveler
         public List<NameValueInfo> Places { get; private set; } = new List<NameValueInfo>();
         public List<EnemyInfo> Enemies { get; private set; } = new List<EnemyInfo>();
         public List<TameMonsterInfo> TameMonsters { get; private set; } = new List<TameMonsterInfo>();
-
-        private readonly Dictionary<uint, NameValueInfo> _unknownNames = new();
+        public List<TreasureStateInfo> TreasureStates { get; private set; } = new List<TreasureStateInfo>();
 
         private Info() { }
 
@@ -32,8 +34,12 @@ namespace OctopathTraveler
             return mThis;
         }
 
-        public NameValueInfo Search<TType>(List<TType> list, uint id, bool returnIdNameIfNotExist = true)
-            where TType : NameValueInfo, new()
+        public static string GetNameOrID2Hex<TInfo>(List<TInfo> list, uint id) where TInfo : NameValueInfo, new()
+        {
+            return Search(list, id)?.Name ?? $"{id}(0x{id:X})";
+        }
+
+        public static TType Search<TType>(List<TType> list, uint id) where TType : NameValueInfo, new()
         {
             int min = 0;
             int max = list.Count;
@@ -44,33 +50,48 @@ namespace OctopathTraveler
                 else if (list[mid].Value > id) max = mid;
                 else min = mid + 1;
             }
-            if (!returnIdNameIfNotExist)
-                return null;
-
-            if (!_unknownNames.TryGetValue(id, out var unknownName))
-            {
-                unknownName = NameValueInfo.CreateUnknownName(id);
-                _unknownNames.Add(id, unknownName);
-            }
-            return unknownName;
+            return null;
         }
 
         private void Init()
         {
-            string cultureName = CultureInfo.CurrentUICulture.Name.ToLower().Replace("-", "_");
+            byte[] excel;
+            var culture = Resources.Culture ?? CultureInfo.CurrentUICulture;
 
-            string file = $"info_{cultureName}.xlsx";
-            if (!File.Exists(file))
+            string file = $"info_{culture.Name.ToLower().Replace("-", "_")}.xlsx";
+            if (File.Exists(file))
             {
-                if (!File.Exists("info.xlsx"))
+                LoadedInfoFile = "Info Excel Path: " + file.Replace("_", "__");
+                excel = File.ReadAllBytes(file);
+            }
+            else if (File.Exists("info.xlsx"))
+            {
+                LoadedInfoFile = "Info Excel Path: info.xlsx";
+                excel = File.ReadAllBytes("info.xlsx");
+            }
+            else
+            {
+                var resourceSet = Resources.ResourceManager.GetResourceSet(culture, true, false);
+                excel = resourceSet == null ? null : resourceSet.GetObject("InfoExcel") as byte[];
+                if (excel == null)
                 {
-                    MessageBox.Show($"Can't find [info.xlsx] or [{file}] in current folder, the names of items, characters, etc. will not be displayed", "Load names failed");
-                    return;
+                    resourceSet = Resources.ResourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, false);
+                    excel = resourceSet == null ? null : resourceSet.GetObject("InfoExcel") as byte[];
+                    LoadedInfoFile = "Info Excel Path: Embedded Resource, Language: Unknown";
                 }
-                file = "info.xlsx";
+                else
+                {
+                    LoadedInfoFile = "Info Excel Path: Embedded Resource, Language: " + culture.Name;
+                }
             }
 
-            var reader = new ExcelReader(file);
+            if (excel == null || excel.Length <= 0)
+            {
+                LoadedInfoFile = "Info Excel Path: NotFound";
+                return;
+            }
+
+            var reader = new ExcelReader(excel);
             reader.AppendListAndOrderByValue("item", Items);
             reader.AppendListAndOrderByValue("character", CharaNames);
             reader.AppendListAndOrderByValue("job", Jobs);
@@ -79,6 +100,37 @@ namespace OctopathTraveler
             reader.AppendListAndOrderByValue("place", Places);
             reader.AppendListAndOrderByValue("enemy_weakness", Enemies);
             reader.AppendListAndOrderByValue("tame_monster", TameMonsters);
+            reader.AppendListAndOrderByValue("treasure_states", TreasureStates);
+        }
+
+        public static bool TryGetEmbeddedInfoExcel(out (string, byte[])[] excels)
+        {
+            var culture = Resources.Culture ?? CultureInfo.CurrentUICulture;
+            var cultureExcel = Resources.ResourceManager.GetResourceSet(culture, true, false)?.GetObject("InfoExcel") as byte[];
+            var invariantExcel = Resources.ResourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, false)?.GetObject("InfoExcel") as byte[];
+            if (invariantExcel != null && cultureExcel != null)
+            {
+                excels = new[]
+                {
+                    ($"info_{culture.Name.ToLower().Replace("-", "_")}.xlsx", cultureExcel),
+                    ("info.xlsx", invariantExcel)
+                };
+                return true;
+            }
+
+            if (invariantExcel == null && cultureExcel == null)
+            {
+                excels = null;
+                return false;
+            }
+
+            if (cultureExcel != null)
+            {
+                excels = new[] { ($"info_{culture.Name.ToLower().Replace("-", "_")}.xlsx", cultureExcel) };
+                return true;
+            }
+            excels = new[] { ($"info.xlsx", cultureExcel) };
+            return true;
         }
 
         private class ExcelReader
@@ -86,9 +138,9 @@ namespace OctopathTraveler
             private readonly MemoryStream _stream;
             private readonly HashSet<string> _sheets;
 
-            public ExcelReader(string path)
+            public ExcelReader(byte[] excel)
             {
-                _stream = new MemoryStream(File.ReadAllBytes(path), false);
+                _stream = new MemoryStream(excel, false);
                 _sheets = new HashSet<string>(MiniExcel.GetSheetNames(_stream));
             }
 

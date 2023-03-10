@@ -26,7 +26,7 @@
             <StackPanel Orientation="Horizontal">
                 <Label Margin="0,0,-6,0">Modifier2 :</Label>
                 <Label MouseDown="LabelModifier2_MouseDown">
-                    <TextBlock TextDecorations="Underline">LonelyWindG/OctopathTraveler-SavaDataEditor</TextBlock>
+                    <TextBlock FontWeight="Bold" TextDecorations="Underline">LonelyWindG/OctopathTraveler-SavaDataEditor</TextBlock>
                 </Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">

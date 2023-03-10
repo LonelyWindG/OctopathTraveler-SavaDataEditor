@@ -6,6 +6,12 @@ namespace OctopathTraveler
 {
     class SaveData
     {
+#if DEBUG_READONLYMODE
+        public static readonly bool IsReadonlyMode = true;
+#else
+        public static readonly bool IsReadonlyMode = false;
+#endif
+
         private static SaveData mThis;
         private string mFileName = null;
         private byte[] mBuffer = null;
@@ -32,14 +38,14 @@ namespace OctopathTraveler
 
         public bool Save()
         {
-            if (mFileName == null || mBuffer == null) return false;
+            if (IsReadonlyMode || mFileName == null || mBuffer == null) return false;
             File.WriteAllBytes(mFileName, mBuffer);
             return true;
         }
 
         public bool SaveAs(string filenname)
         {
-            if (mBuffer == null) return false;
+            if (IsReadonlyMode || mBuffer == null) return false;
             mFileName = filenname;
             return Save();
         }
@@ -191,6 +197,9 @@ namespace OctopathTraveler
 
         private void Backup()
         {
+            if (IsReadonlyMode)
+                return;
+
             DateTime now = DateTime.Now;
             string path = Path.Combine(Directory.GetCurrentDirectory(), "backup");
             if (!Directory.Exists(path))
