@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OctopathTraveler
 {
-    class TreasureState : INotifyPropertyChanged
+    class TreasureState/* : INotifyPropertyChanged*/
     {
         private uint summation;
         private uint chest;
@@ -28,7 +28,7 @@ namespace OctopathTraveler
 
         public TreasureStateInfo Info { get; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        //public event PropertyChangedEventHandler PropertyChanged;
 
         public TreasureState(uint address, TreasureStateInfo info)
         {

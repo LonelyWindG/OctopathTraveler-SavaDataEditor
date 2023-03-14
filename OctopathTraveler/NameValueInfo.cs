@@ -8,15 +8,6 @@ namespace OctopathTraveler
         public uint Value { get; private set; }
         public string Name { get; private set; }
 
-        public static NameValueInfo CreateUnknownName(uint value)
-        {
-            return new NameValueInfo
-            {
-                Value = value,
-                Name = $"{value}(0x{value:X})"
-            };
-        }
-
         public virtual bool CheckHeaderRow(IDictionary<string, object> row)
         {
             if (row.Count < 2 || !row.TryGetValue("A", out var id))

@@ -431,6 +431,15 @@ namespace OctopathTraveler.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Some of the places on this page may be missing names, and some place IDs cannot be found, possibly because they were abandoned during game development and not removed. 的本地化字符串。
+        /// </summary>
+        public static string TabItemPlacesWarning {
+            get {
+                return ResourceManager.GetString("TabItemPlacesWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Quests 的本地化字符串。
         /// </summary>
         public static string TabItemQuests {

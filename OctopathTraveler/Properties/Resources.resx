@@ -241,6 +241,9 @@
   <data name="TabItemPlaces" xml:space="preserve">
     <value>Places</value>
   </data>
+  <data name="TabItemPlacesWarning" xml:space="preserve">
+    <value>Some of the places on this page may be missing names, and some place IDs cannot be found, possibly because they were abandoned during game development and not removed.</value>
+  </data>
   <data name="TabItemQuests" xml:space="preserve">
     <value>Quests</value>
   </data>

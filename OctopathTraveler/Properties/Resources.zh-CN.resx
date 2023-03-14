@@ -181,7 +181,7 @@
     <value>队伍</value>
   </data>
   <data name="TabItemPlaces" xml:space="preserve">
-    <value>地区</value>
+    <value>地点</value>
   </data>
   <data name="TabItemQuests" xml:space="preserve">
     <value>任务</value>
@@ -270,5 +270,8 @@
   </data>
   <data name="MenuExportInfoExcel" xml:space="preserve">
     <value>导出嵌入的数据Excel(_E)...</value>
+  </data>
+  <data name="TabItemPlacesWarning" xml:space="preserve">
+    <value>该页面中的地点可能遗漏部分名称, 而且有些地点ID找不到对应名称, 可能是游戏开发时的弃用地点未移除</value>
   </data>
 </root>

@@ -203,33 +203,69 @@
                     <TabItem.Resources>
                         <local:ItemNameConverter x:Key="ItemNameConverter"/>
                     </TabItem.Resources>
-                    <ListBox ItemsSource="{Binding Items}">
+                    <ListBox ItemsSource="{Binding Items}" VirtualizingStackPanel.VirtualizationMode="Recycling"  VirtualizingStackPanel.IsVirtualizing="True">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
+                                <VirtualizingStackPanel Orientation="Horizontal">
                                     <Label Content="Count: "/>
                                     <TextBox Width="50" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}"/>
                                     <Button Content=" ... " Click="ButtonItem_Click"/>
                                     <Label Content="{Binding ID, Converter={StaticResource ItemNameConverter}}"/>
-                                </StackPanel>
+                                </VirtualizingStackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </TabItem>
                 <TabItem Header="{x:Static properties:Resources.TabItemPlaces}">
-                    <ListBox ItemsSource="{Binding Places}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <CheckBox Content="{Binding Name}" IsChecked="{Binding Visit}"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                    <Grid>
+                        <Grid.Resources>
+                            <local:PartyMemberConverter x:Key="PartyMemberConverter"/>
+                        </Grid.Resources>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0">
+                            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TabItemPlacesWarning}" />
+                        </Label>
+                        <ListBox ItemsSource="{Binding Places}" Grid.Row="1">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding Visit}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
                 </TabItem>
                 <TabItem Header="{x:Static properties:Resources.TabItemTameMonster}">
                     <TabItem.Resources>
                         <local:TameMonsterConverter x:Key="TameMonsterConverter"/>
                     </TabItem.Resources>
-                    <StackPanel Orientation="Vertical">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0">
+                            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TabItemTameMonsterWarning}" />
+                        </Label>
+                        <ListBox ItemsSource="{Binding TameMonsters}" Grid.Row="1">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Name "/>
+                                        <ComboBox ItemsSource="{Binding Path=DataContext.Info.TameMonsters, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=local:MainWindow}}"
+                                              DisplayMemberPath="Name" SelectedIndex="{Binding ID, Converter={StaticResource TameMonsterConverter}}"
+                                              Width="200"/>
+                                        <Label Content="Count "/>
+                                        <TextBox Text="{Binding Count,UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+                                        <CheckBox IsChecked="{Binding Used}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                    <!--<StackPanel Orientation="Vertical">
                         <Label>
                             <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TabItemTameMonsterWarning}" />
                         </Label>
@@ -248,7 +284,7 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                    </StackPanel>
+                    </StackPanel>-->
                 </TabItem>
                 <TabItem Header="{x:Static properties:Resources.TabItemWeak}">
                     <ListView ItemsSource="{Binding EnemyWeaknesses}">

@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace OctopathTraveler
 {
@@ -33,14 +31,17 @@ namespace OctopathTraveler
                 Charactors.Add(chara);
             }
 
+            var items = new List<Item>(Info.Items.Count);
             foreach (var address in save.FindAddress("ItemID_", 0))
             {
                 var item = new Item(address);
                 if (item.ID == 0)
                     continue;
 
-                Items.Add(item);
+                items.Add(item);
             }
+            items.Sort((x, y) => x.ID.CompareTo(y.ID));
+            Items = new ObservableCollection<Item>(items);
 
             var gvas = new GVAS(null);
             gvas.AppendValue(save.FindAddress("MainMemberID_", 0)[0]);
