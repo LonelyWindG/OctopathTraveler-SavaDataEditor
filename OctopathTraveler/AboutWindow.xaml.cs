@@ -35,6 +35,11 @@ namespace OctopathTraveler
 
         private void LabelDataSource2_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            OpenURL("https://docs.google.com/spreadsheets/d/1WGN0166crI5IbnJ4QADnLiNHrL2FUr0MVFqmWH7dBRg");
+        }
+
+        private void LabelDataSource3_MouseDown(object sender, MouseButtonEventArgs e)
+        {
             OpenURL("https://docs.google.com/spreadsheets/d/1O1OYHmLNsUcak5dByXbmEFDaxIbp-mDSHGC6j92P5ho");
         }
 

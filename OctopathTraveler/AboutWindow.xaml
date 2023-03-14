@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OctopathTraveler"
         mc:Ignorable="d"
-        Title="About" Height="220" Width="465">
+        Title="About" Height="245" Width="465">
     <Grid>
         <StackPanel>
             <Label Content="Creater : カメムシ"/>
@@ -38,6 +38,12 @@
             <StackPanel Orientation="Horizontal">
                 <Label Margin="0,0,-6,0">DataSource2 :</Label>
                 <Label MouseDown="LabelDataSource2_MouseDown">
+                    <TextBlock TextDecorations="Underline">Octopath Traveler : TreasureStates - Google Sheets</TextBlock>
+                </Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="0,0,-6,0">DataSource3 :</Label>
+                <Label MouseDown="LabelDataSource3_MouseDown">
                     <TextBlock TextDecorations="Underline">Octopath Traveler : MONSTERS ID LIST - Google Sheets</TextBlock>
                 </Label>
             </StackPanel>
