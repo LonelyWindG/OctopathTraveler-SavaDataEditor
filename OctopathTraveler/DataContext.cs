@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 
 namespace OctopathTraveler
@@ -120,6 +121,10 @@ namespace OctopathTraveler
                     continue;
 
                 uint treausreAddress = treasures[i] + 100;
+                if (tid == 1277013)
+                {
+                    Trace.Write($"{i + 1}/{treasures.Count}");
+                }
 
                 //var data = gvas.Key("TreasureStateArray_" + i);
                 var treasure = new TreasureState(treausreAddress, info);

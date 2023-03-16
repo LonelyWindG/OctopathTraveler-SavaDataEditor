@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Microsoft.Win32;
+using static OctopathTraveler.Properties.Resources;
 
 namespace OctopathTraveler
 {
@@ -57,13 +58,12 @@ namespace OctopathTraveler
 
         private void Window_Drop(object sender, DragEventArgs e)
         {
-            string[] files = e.Data.GetData(DataFormats.FileDrop) as string[];
-            if (files == null) return;
-            if (!System.IO.File.Exists(files[0])) return;
+            if (e.Data.GetData(DataFormats.FileDrop) is not string[] files) return;
+            if (!File.Exists(files[0])) return;
 
             SaveData.Instance().Open(files[0]);
             Init();
-            MessageBox.Show(Properties.Resources.MessageLoadSuccess);
+            MessageBox.Show(MessageLoadSuccess);
         }
 
         private void MenuItemFileOpen_Click(object sender, RoutedEventArgs e)
@@ -75,7 +75,7 @@ namespace OctopathTraveler
         {
             if (SaveData.IsReadonlyMode)
             {
-                MessageBox.Show("ReadonlyMode");
+                MessageBox.Show(MeaageSaveFail, "ReadonlyMode");
                 return;
             }
             Save();
@@ -85,44 +85,49 @@ namespace OctopathTraveler
         {
             if (SaveData.IsReadonlyMode)
             {
-                MessageBox.Show("ReadonlyMode");
+                MessageBox.Show(MeaageSaveFail, "ReadonlyMode");
                 return;
             }
 
-            SaveFileDialog dlg = new SaveFileDialog();
+            var dlg = new SaveFileDialog();
             if (dlg.ShowDialog() == false) return;
 
-            if (SaveData.Instance().SaveAs(dlg.FileName) == true) MessageBox.Show(Properties.Resources.MessageSaveSuccess);
-            else MessageBox.Show(Properties.Resources.MeaageSaveFail, SaveData.IsReadonlyMode ? "ReadonlyMode" : "");
+            if (SaveData.Instance().SaveAs(dlg.FileName) == true) MessageBox.Show(MessageSaveSuccess);
+            else MessageBox.Show(MeaageSaveFail, SaveData.IsReadonlyMode ? "ReadonlyMode" : "");
+        }
+
+        private void MenuItemFileSaveAsJson_Click(object sender, RoutedEventArgs e)
+        {
+            ConvertSaveDataToJson(false);
         }
 
         private void MenuItemExportInfoExcel_Click(object sender, RoutedEventArgs e)
         {
             if (!Info.TryGetEmbeddedInfoExcel(out var excels))
             {
-                MessageBox.Show(Properties.Resources.MeaageSaveFail);
+                MessageBox.Show(MeaageSaveFail);
                 return;
             }
 
             bool isSaveAny = false;
-            foreach (var excel in excels)
+            foreach ((var fileName, var bytes) in excels)
             {
-                string ext = Path.GetExtension(excel.Item1);
+                string ext = Path.GetExtension(fileName);
                 string v = $"Excel files (*{ext})|*{ext}|All files (*.*)|*.*";
                 var dialog = new SaveFileDialog
                 {
                     InitialDirectory = Directory.GetCurrentDirectory(),
-                    FileName = excel.Item1,
+                    FileName = fileName,
                     Filter = v
                 };
                 if (dialog.ShowDialog() == false)
                     continue;
 
-                File.WriteAllBytes(Path.Combine(dialog.InitialDirectory, dialog.FileName), excel.Item2);
+                File.WriteAllBytes(dialog.FileName, bytes);
                 isSaveAny = true;
             }
 
-            MessageBox.Show(isSaveAny ? Properties.Resources.MessageSaveSuccess : Properties.Resources.MeaageSaveFail);
+            MessageBox.Show(isSaveAny ? MessageSaveSuccess : MeaageSaveFail);
         }
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)
@@ -150,6 +155,11 @@ namespace OctopathTraveler
             Save();
         }
 
+        private void ToolBarConvertToJson_Click(object sender, RoutedEventArgs e)
+        {
+            ConvertSaveDataToJson(true);
+        }
+
         private void Init()
         {
             SetWeakFilter(0);
@@ -160,24 +170,74 @@ namespace OctopathTraveler
 
         private void Load(bool force)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
+            var dlg = new OpenFileDialog();
             if (dlg.ShowDialog() == false) return;
 
             SaveData.Instance().Open(dlg.FileName);
             Init();
-            MessageBox.Show(Properties.Resources.MessageLoadSuccess);
+            MessageBox.Show(MessageLoadSuccess);
         }
 
         private void Save()
         {
-            if (SaveData.Instance().Save() == true) MessageBox.Show(Properties.Resources.MessageSaveSuccess);
-            else MessageBox.Show(Properties.Resources.MeaageSaveFail, SaveData.IsReadonlyMode ? "ReadonlyMode" : "");
+            if (SaveData.Instance().Save() == true) MessageBox.Show(MessageSaveSuccess);
+            else MessageBox.Show(MeaageSaveFail, SaveData.IsReadonlyMode ? "ReadonlyMode" : "");
+        }
+
+        private static void ConvertSaveDataToJson(bool convertOtherFile)
+        {
+            string fileName;
+            if (convertOtherFile)
+            {
+                var openDialog = new OpenFileDialog();
+                if (openDialog.ShowDialog() == false) return;
+                fileName = openDialog.FileName;
+            }
+            else
+            {
+                fileName = SaveData.Instance().FileName;
+                if (string.IsNullOrWhiteSpace(fileName))
+                {
+                    MessageBox.Show(MeaageSaveFail);
+                    return;
+                }
+            }
+
+            string folder = Path.GetDirectoryName(fileName);
+            var saveDialog = new SaveFileDialog
+            {
+                InitialDirectory = string.IsNullOrEmpty(folder) ? Directory.GetCurrentDirectory() : folder,
+                FileName = Path.GetFileName(fileName) + ".json",
+                Filter = "Json files (*.json)|*.json|All files (*.*)|*.*"
+            };
+            if (saveDialog.ShowDialog() == false)
+                return;
+
+            bool saved;
+            Exception ex;
+
+            if (convertOtherFile)
+                (saved, ex) = GvasFormat.GvasConverter.Convert2JsonFile(saveDialog.FileName, File.OpenRead(fileName));
+            else
+                (saved, ex) = SaveData.Instance().SaveAsJson(saveDialog.FileName);
+
+            if (ex != null)
+            {
+                if (saved)
+                    MessageBox.Show("Only part of the data is saved as json because of the exception:\n" + ex.ToString(), MessageSaveSuccess);
+                else
+                    MessageBox.Show(ex.ToString(), MeaageSaveFail);
+
+            }
+            else
+            {
+                MessageBox.Show(saved ? MessageSaveSuccess : MeaageSaveFail);
+            }
         }
 
         private void ButtonSword_Click(object sender, RoutedEventArgs e)
         {
-            Charactor chara = CharactorList.SelectedItem as Charactor;
-            if(chara != null)
+            if (CharactorList.SelectedItem is Charactor chara)
             {
                 chara.Sword = ChoiceEquipment(chara.Sword);
             }
@@ -185,8 +245,7 @@ namespace OctopathTraveler
 
         private void ButtonLance_Click(object sender, RoutedEventArgs e)
         {
-            Charactor chara = CharactorList.SelectedItem as Charactor;
-            if (chara != null)
+            if (CharactorList.SelectedItem is Charactor chara)
             {
                 chara.Lance = ChoiceEquipment(chara.Lance);
             }
@@ -194,8 +253,7 @@ namespace OctopathTraveler
 
         private void ButtonDagger_Click(object sender, RoutedEventArgs e)
         {
-            Charactor chara = CharactorList.SelectedItem as Charactor;
-            if (chara != null)
+            if (CharactorList.SelectedItem is Charactor chara)
             {
                 chara.Dagger = ChoiceEquipment(chara.Dagger);
             }
@@ -203,8 +261,7 @@ namespace OctopathTraveler
 
         private void ButtonAxe_Click(object sender, RoutedEventArgs e)
         {
-            Charactor chara = CharactorList.SelectedItem as Charactor;
-            if (chara != null)
+            if (CharactorList.SelectedItem is Charactor chara)
             {
                 chara.Axe = ChoiceEquipment(chara.Axe);
             }
@@ -212,8 +269,7 @@ namespace OctopathTraveler
 
         private void ButtonBow_Click(object sender, RoutedEventArgs e)
         {
-            Charactor chara = CharactorList.SelectedItem as Charactor;
-            if (chara != null)
+            if (CharactorList.SelectedItem is Charactor chara)
             {
                 chara.Bow = ChoiceEquipment(chara.Bow);
             }
@@ -221,8 +277,7 @@ namespace OctopathTraveler
 
         private void ButtonRod_Click(object sender, RoutedEventArgs e)
         {
-            Charactor chara = CharactorList.SelectedItem as Charactor;
-            if (chara != null)
+            if (CharactorList.SelectedItem is Charactor chara)
             {
                 chara.Rod = ChoiceEquipment(chara.Rod);
             }
@@ -230,8 +285,7 @@ namespace OctopathTraveler
 
         private void ButtonShield_Click(object sender, RoutedEventArgs e)
         {
-            Charactor chara = CharactorList.SelectedItem as Charactor;
-            if (chara != null)
+            if (CharactorList.SelectedItem is Charactor chara)
             {
                 chara.Shield = ChoiceEquipment(chara.Shield);
             }
@@ -239,8 +293,7 @@ namespace OctopathTraveler
 
         private void ButtonHead_Click(object sender, RoutedEventArgs e)
         {
-            Charactor chara = CharactorList.SelectedItem as Charactor;
-            if (chara != null)
+            if (CharactorList.SelectedItem is Charactor chara)
             {
                 chara.Head = ChoiceEquipment(chara.Head);
             }
@@ -248,8 +301,7 @@ namespace OctopathTraveler
 
         private void ButtonBody_Click(object sender, RoutedEventArgs e)
         {
-            Charactor chara = CharactorList.SelectedItem as Charactor;
-            if (chara != null)
+            if (CharactorList.SelectedItem is Charactor chara)
             {
                 chara.Body = ChoiceEquipment(chara.Body);
             }
@@ -257,8 +309,7 @@ namespace OctopathTraveler
 
         private void ButtonAccessory1_Click(object sender, RoutedEventArgs e)
         {
-            Charactor chara = CharactorList.SelectedItem as Charactor;
-            if (chara != null)
+            if (CharactorList.SelectedItem is Charactor chara)
             {
                 chara.Accessory1 = ChoiceEquipment(chara.Accessory1);
             }
@@ -266,8 +317,7 @@ namespace OctopathTraveler
 
         private void ButtonAccessory2_Click(object sender, RoutedEventArgs e)
         {
-            Charactor chara = CharactorList.SelectedItem as Charactor;
-            if (chara != null)
+            if (CharactorList.SelectedItem is Charactor chara)
             {
                 chara.Accessory2 = ChoiceEquipment(chara.Accessory2);
             }
@@ -275,12 +325,13 @@ namespace OctopathTraveler
 
         private void ButtonItem_Click(object sender, RoutedEventArgs e)
         {
-            Item item = (sender as Button)?.DataContext as Item;
-            if(item != null)
+            if (sender is Button { DataContext: Item item })
             {
-                ItemChoiceWindow window = new ItemChoiceWindow();
-                window.Type = ItemChoiceWindow.eType.item;
-                window.ID = item.ID;
+                var window = new ItemChoiceWindow
+                {
+                    Type = ItemChoiceWindow.eType.item,
+                    ID = item.ID
+                };
                 window.ShowDialog();
                 item.ID = window.ID;
             }
@@ -288,8 +339,10 @@ namespace OctopathTraveler
 
         private uint ChoiceEquipment(uint id)
         {
-            ItemChoiceWindow window = new ItemChoiceWindow();
-            window.ID = id;
+            var window = new ItemChoiceWindow
+            {
+                ID = id
+            };
             window.ShowDialog();
             return window.ID;
         }
@@ -316,7 +369,7 @@ namespace OctopathTraveler
                         builder.Append(des);
                         builder.Append(" : ");
                         builder.Append(completed);
-                        builder.Append("/");
+                        builder.Append('/');
                         builder.Append(total);
                         builder.AppendLine();
                     }
@@ -394,16 +447,16 @@ namespace OctopathTraveler
                         builder.Append(des);
                         builder.Append(" : ");
                         builder.Append(completed);
-                        builder.Append("/");
+                        builder.Append('/');
                         builder.Append(total);
                         builder.AppendLine();
                     }
 
                     AppendNum(builder, "Completed", completedCount, (uint)treasureStates.Count);
                     AppendNum(builder, "Uncompleted", (uint)treasureStates.Count - completedCount, (uint)treasureStates.Count);
-                    AppendNum(builder, Properties.Resources.TreasureStatesSummation, completedChest + completedHiddenItem, totalChest + totalHiddenItem);
-                    AppendNum(builder, Properties.Resources.TreasureStatesChest, completedChest, totalChest);
-                    AppendNum(builder, Properties.Resources.TreasureStatesHiddenItem, completedHiddenItem, totalHiddenItem);
+                    AppendNum(builder, TreasureStatesSummation, completedChest + completedHiddenItem, totalChest + totalHiddenItem);
+                    AppendNum(builder, TreasureStatesChest, completedChest, totalChest);
+                    AppendNum(builder, TreasureStatesHiddenItem, completedHiddenItem, totalHiddenItem);
                     text = builder.ToString();
                 }
             }

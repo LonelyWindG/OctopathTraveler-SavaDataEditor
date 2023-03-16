@@ -9,7 +9,7 @@
         Title="{x:Static properties:Resources.MainWindowTitle}" Height="650" Width="800"
         WindowStartupLocation="CenterScreen"
         AllowDrop="True" Drop="Window_Drop" PreviewDragOver="Window_PreviewDragOver">
-    
+
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
@@ -17,6 +17,7 @@
                     <MenuItem Header="{x:Static properties:Resources.MenuFileOpen}" Click="MenuItemFileOpen_Click"/>
                     <MenuItem Header="{x:Static properties:Resources.MenuFileSave}" Click="MenuItemFileSave_Click"/>
                     <MenuItem Header="{x:Static properties:Resources.MenuFileSaveAs}" Click="MenuItemFileSaveAs_Click"/>
+                    <MenuItem Header="{x:Static properties:Resources.MenuFileSaveAsJson}" Click="MenuItemFileSaveAsJson_Click"/>
                     <MenuItem Header="{x:Static properties:Resources.MenuExportInfoExcel}" Click="MenuItemExportInfoExcel_Click"/>
                     <Separator/>
                     <MenuItem Header="{x:Static properties:Resources.MenuExit}" Click="MenuItemExit_Click"/>
@@ -25,10 +26,16 @@
             </Menu>
             <ToolBar DockPanel.Dock="Top">
                 <Button Width="32" Height="32" Click="ToolBarFileOpen_Click" ToolTip="{x:Static properties:Resources.ToolTipOpen}">
-                    <Image Source="{StaticResource Open}"/>
+                    <Image Source="/Resource/Open.png"/>
                 </Button>
-                <Button Name="TopBar_ButtonSave" Width="32" Height="32" Click="ToolBarFileSave_Click" ToolTip="{x:Static properties:Resources.ToolTipSave}">
-                    <Image Source="{StaticResource Save}"/>
+                <Button Name="TopBar_ButtonSave" Width="32" Height="32" Click="ToolBarFileSave_Click" ToolTip="{x:Static properties:Resources.ToolTipSave}" IsCancel="True">
+                    <Image Source="/Resource/Save.png"/>
+                </Button>
+                <Button Width="32" Height="32" Click="MenuItemFileSaveAsJson_Click" ToolTip="{x:Static properties:Resources.ToolTipSaveAsJson}">
+                    <Image Source="/Resource/SaveAsJson.png"/>
+                </Button>
+                <Button Width="32" Height="32" Click="ToolBarConvertToJson_Click" ToolTip="{x:Static properties:Resources.ToolTipConvert}" >
+                    <Image Source="/Resource/Convert.png"/>
                 </Button>
                 <Label Name="TopBar_LoadedInfoFile" VerticalAlignment="Center"/>
             </ToolBar>

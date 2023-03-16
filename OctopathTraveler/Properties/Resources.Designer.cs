@@ -278,7 +278,7 @@ namespace OctopathTraveler.Properties {
         }
         
         /// <summary>
-        ///   查找类似 OCTOPATH TRAVELER SaveDataEditor(Nintendo Switch) 的本地化字符串。
+        ///   查找类似 OCTOPATH TRAVELER SaveDataEditor 的本地化字符串。
         /// </summary>
         public static string MainWindowTitle {
             get {
@@ -350,11 +350,20 @@ namespace OctopathTraveler.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Save(_A)s... 的本地化字符串。
+        ///   查找类似 Save (_A)s... 的本地化字符串。
         /// </summary>
         public static string MenuFileSaveAs {
             get {
                 return ResourceManager.GetString("MenuFileSaveAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Save As (_J)son... 的本地化字符串。
+        /// </summary>
+        public static string MenuFileSaveAsJson {
+            get {
+                return ResourceManager.GetString("MenuFileSaveAsJson", resourceCulture);
             }
         }
         
@@ -485,6 +494,15 @@ namespace OctopathTraveler.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Convert SaveData to Json 的本地化字符串。
+        /// </summary>
+        public static string ToolTipConvert {
+            get {
+                return ResourceManager.GetString("ToolTipConvert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Open 的本地化字符串。
         /// </summary>
         public static string ToolTipOpen {
@@ -499,6 +517,15 @@ namespace OctopathTraveler.Properties {
         public static string ToolTipSave {
             get {
                 return ResourceManager.GetString("ToolTipSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Save As Json 的本地化字符串。
+        /// </summary>
+        public static string ToolTipSaveAsJson {
+            get {
+                return ResourceManager.GetString("ToolTipSaveAsJson", resourceCulture);
             }
         }
         

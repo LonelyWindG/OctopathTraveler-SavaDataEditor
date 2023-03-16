@@ -274,4 +274,13 @@
   <data name="TabItemPlacesWarning" xml:space="preserve">
     <value>该页面中的地点可能遗漏部分名称, 而且有些地点ID找不到对应名称, 可能是游戏开发时的弃用地点未移除</value>
   </data>
+  <data name="MenuFileSaveAsJson" xml:space="preserve">
+    <value>另存为Json(_J)...</value>
+  </data>
+  <data name="ToolTipConvert" xml:space="preserve">
+    <value>将存档转换为Json</value>
+  </data>
+  <data name="ToolTipSaveAsJson" xml:space="preserve">
+    <value>另存为Json</value>
+  </data>
 </root>

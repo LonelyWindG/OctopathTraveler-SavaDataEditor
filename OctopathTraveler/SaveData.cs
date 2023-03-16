@@ -17,14 +17,14 @@ namespace OctopathTraveler
         private byte[] mBuffer = null;
         private readonly System.Text.Encoding mEncode = System.Text.Encoding.ASCII;
         public uint Adventure { private get; set; } = 0;
+        public string FileName => mFileName;
 
         private SaveData()
         { }
 
         public static SaveData Instance()
         {
-            if (mThis == null) mThis = new SaveData();
-            return mThis;
+            return mThis ??= new SaveData();
         }
 
         public bool Open(string filename)
@@ -48,6 +48,12 @@ namespace OctopathTraveler
             if (IsReadonlyMode || mBuffer == null) return false;
             mFileName = filenname;
             return Save();
+        }
+
+        public (bool, Exception) SaveAsJson(string filePath)
+        {
+            if (mBuffer == null) return (false, null);
+            return GvasFormat.GvasConverter.Convert2JsonFile(filePath, new MemoryStream(mBuffer, false));
         }
 
         public uint ReadNumber(uint address, uint size)
@@ -200,14 +206,12 @@ namespace OctopathTraveler
             if (IsReadonlyMode)
                 return;
 
-            DateTime now = DateTime.Now;
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "backup");
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "OctopathTraveler Backup");
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
-            path = Path.Combine(path,
-                string.Format("{0:0000}-{1:00}-{2:00} {3:00}-{4:00}", now.Year, now.Month, now.Day, now.Hour, now.Minute));
+            path = Path.Combine(path, $"{Path.GetFileName(mFileName)}-{DateTime.Now:yyyy-MM-dd-HH-mm}");
             File.WriteAllBytes(path, mBuffer);
         }
     }
