@@ -9,10 +9,10 @@
 [日本語](README_JA.md) [中文](README.md)
 
 ## Overview
-Available for Steam, Xbox PC, Nintendo Switch
+Available for Steam, Xbox PC, Nintendo Switch, etc.
 
 ## Official Game Site
-https://octopathtraveler.nintendo.com/
+https://www.square-enix-games.com/games/octopath-traveler
 
 ## Prerequisites
 * Windows machine
@@ -43,3 +43,4 @@ https://octopathtraveler.nintendo.com/
    * [Octopath Traveler : TreasureStates - Google Sheets](https://docs.google.com/spreadsheets/d/1WGN0166crI5IbnJ4QADnLiNHrL2FUr0MVFqmWH7dBRg)
    * [八方旅人宝箱状态对照说明 - Baidu Tieba](https://tieba.baidu.com/p/7822253075)
    * [Octopath Traveler : MONSTERS ID LIST - Google Sheets](https://docs.google.com/spreadsheets/d/1O1OYHmLNsUcak5dByXbmEFDaxIbp-mDSHGC6j92P5ho)
+   * [GVAS-Converter](https://github.com/januwA/gvas-converter)
