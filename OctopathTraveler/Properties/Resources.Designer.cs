@@ -61,11 +61,29 @@ namespace OctopathTraveler.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Money 的本地化字符串。
+        ///   查找类似 Achievement Progress: (Following data) 的本地化字符串。
         /// </summary>
-        public static string BacisMoney {
+        public static string BasicAchievementProgress {
             get {
-                return ResourceManager.GetString("BacisMoney", resourceCulture);
+                return ResourceManager.GetString("BasicAchievementProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 BattleCount 的本地化字符串。
+        /// </summary>
+        public static string BasicBattleCount {
+            get {
+                return ResourceManager.GetString("BasicBattleCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 EscapeCount 的本地化字符串。
+        /// </summary>
+        public static string BasicEscapeCount {
+            get {
+                return ResourceManager.GetString("BasicEscapeCount", resourceCulture);
             }
         }
         
@@ -75,6 +93,51 @@ namespace OctopathTraveler.Properties {
         public static string BasicHero {
             get {
                 return ResourceManager.GetString("BasicHero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 HiddenPointCount 的本地化字符串。
+        /// </summary>
+        public static string BasicHiddenPointCount {
+            get {
+                return ResourceManager.GetString("BasicHiddenPointCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Money 的本地化字符串。
+        /// </summary>
+        public static string BasicMoney {
+            get {
+                return ResourceManager.GetString("BasicMoney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 PlayTime 的本地化字符串。
+        /// </summary>
+        public static string BasicPlayTime {
+            get {
+                return ResourceManager.GetString("BasicPlayTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 SaveDate 的本地化字符串。
+        /// </summary>
+        public static string BasicSaveDate {
+            get {
+                return ResourceManager.GetString("BasicSaveDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 TreasureCount 的本地化字符串。
+        /// </summary>
+        public static string BasicTreasureCount {
+            get {
+                return ResourceManager.GetString("BasicTreasureCount", resourceCulture);
             }
         }
         

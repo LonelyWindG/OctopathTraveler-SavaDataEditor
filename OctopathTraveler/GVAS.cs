@@ -26,7 +26,7 @@ namespace OctopathTraveler
 			return mValues.ContainsKey(key);
 		}
 
-		public uint AppendValue(uint address)
+		public uint AppendValue(uint address, bool isSubkeyByUnderline = true)
 		{
 			// length
 			address -= 4;
@@ -34,7 +34,7 @@ namespace OctopathTraveler
 			// key
 			address += 4;
 			String key = SaveData.Instance().ReadText(address, length);
-			if (key.IndexOf("_") > 0)
+			if (isSubkeyByUnderline && key.IndexOf("_") > 0)
 			{
 				key = key.Substring(0, key.IndexOf("_"));
 			}

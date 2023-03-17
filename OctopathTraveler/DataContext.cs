@@ -8,6 +8,7 @@ namespace OctopathTraveler
 {
     class DataContext
     {
+        public BasicData BasicData { get; private set; }
         public ObservableCollection<Member> MainParty { get; set; } = new ObservableCollection<Member>();
         public ObservableCollection<Charactor> Charactors { get; set; } = new ObservableCollection<Charactor>();
         public ObservableCollection<Item> Items { get; set; } = new ObservableCollection<Item>();
@@ -20,11 +21,11 @@ namespace OctopathTraveler
 
         public Info Info { get; private set; } = Info.Instance();
 
-        private readonly uint mMoneyAddress;
-        private readonly uint mHeroAddress;
         public DataContext()
         {
-            SaveData save = SaveData.Instance();
+            var save = SaveData.Instance();
+
+            BasicData = new BasicData();
             foreach (var address in save.FindAddress("CharacterID_", 0))
             {
                 var chara = new Charactor(address);
@@ -32,7 +33,7 @@ namespace OctopathTraveler
                 Charactors.Add(chara);
             }
 
-            var items = new List<Item>(Info.Items.Count);
+            var items = new List<Item>(Info.Instance().Items.Count);
             foreach (var address in save.FindAddress("ItemID_", 0))
             {
                 var item = new Item(address);
@@ -45,14 +46,14 @@ namespace OctopathTraveler
             Items = new ObservableCollection<Item>(items);
 
             var gvas = new GVAS(null);
-            gvas.AppendValue(save.FindAddress("MainMemberID_", 0)[0]);
+            gvas.AppendValue(save.FindAddress("MainMemberID_", 0).First());
             for (uint i = 0; i < 4; i++)
             {
                 MainParty.Add(new Member(gvas.Key("MainMemberID_" + i.ToString()).Address));
             }
 
             gvas = new GVAS(null);
-            gvas.AppendValue(save.FindAddress("SubMissionOrder", 0)[0]);
+            gvas.AppendValue(save.FindAddress("SubMissionOrder", 0).First());
             for (uint i = 0; i < 200; i++)
             {
                 MissionIDs.Add(new MissionID(gvas.Key("SubMissionOrder_" + i.ToString())));
@@ -79,11 +80,11 @@ namespace OctopathTraveler
             }
 
             gvas = new GVAS(null);
-            gvas.AppendValue(save.FindAddress("VisitedMap", 0)[0]);
+            gvas.AppendValue(save.FindAddress("VisitedMap", 0).First());
             uint id = 0;
             for (uint i = 0; i < 10; i++)
             {
-                GVASData data = gvas.Key("VisitedMap_" + i.ToString());
+                var data = gvas.Key("VisitedMap_" + i.ToString());
                 for (uint size = 0; size < data.Size; size++)
                 {
                     for (uint bit = 0; bit < 8; bit++)
@@ -131,16 +132,15 @@ namespace OctopathTraveler
                 TreasureStates.Add(treasure);
             }
 
-            gvas = new GVAS(null);
-            uint tame = save.FindAddress("TameMonsterData", 0)[0];
+            uint tame = save.FindAddress("TameMonsterData", 0).First();
             for (uint i = 0; i < 10; i++)
             {
-                uint enemyAddress = save.FindAddress("EnemyID_", tame)[0];
+                uint enemyAddress = save.FindAddress("EnemyID_", tame).First();
                 TameMonsters.Add(new TameMonster(enemyAddress));
                 tame = enemyAddress + 1;
             }
 
-            uint weaks = save.FindAddress("EnemyInfoData", 0)[0];
+            uint weaks = save.FindAddress("EnemyInfoData", 0).First();
             Console.WriteLine(save.FindAddress("IsAnalyse_", 0).Count);
             List<uint> isAnalyseList = save.FindAddress("IsAnalyse_", 0);
 
@@ -156,25 +156,6 @@ namespace OctopathTraveler
                 uint i = isAnalyseList[num];
                 EnemyWeaknesses.Add(new EnemyWeakness(i, num, info));
             }
-
-            gvas = new GVAS(null);
-            gvas.AppendValue(save.FindAddress("Money_", 0)[0]);
-            mMoneyAddress = gvas.Key("Money").Address;
-            gvas = new GVAS(null);
-            gvas.AppendValue(save.FindAddress("FirstSelectCharacterID", 0)[0]);
-            mHeroAddress = gvas.Key("FirstSelectCharacterID").Address;
-        }
-
-        public uint Money
-        {
-            get { return SaveData.Instance().ReadNumber(mMoneyAddress, 4); }
-            set { Util.WriteNumber(mMoneyAddress, 4, value, 0, 9999999); }
-        }
-
-        public uint Hero
-        {
-            get { return SaveData.Instance().ReadNumber(mHeroAddress, 4); }
-            set { SaveData.Instance().WriteNumber(mHeroAddress, 4, value); }
         }
     }
 }

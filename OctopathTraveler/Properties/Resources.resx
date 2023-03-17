@@ -117,11 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BacisMoney" xml:space="preserve">
-    <value>Money</value>
+  <data name="BasicAchievementProgress" xml:space="preserve">
+    <value>Achievement Progress: (Following data)</value>
+  </data>
+  <data name="BasicBattleCount" xml:space="preserve">
+    <value>BattleCount</value>
+  </data>
+  <data name="BasicEscapeCount" xml:space="preserve">
+    <value>EscapeCount</value>
   </data>
   <data name="BasicHero" xml:space="preserve">
     <value>Hero</value>
+  </data>
+  <data name="BasicHiddenPointCount" xml:space="preserve">
+    <value>HiddenPointCount</value>
+  </data>
+  <data name="BasicMoney" xml:space="preserve">
+    <value>Money</value>
+  </data>
+  <data name="BasicPlayTime" xml:space="preserve">
+    <value>PlayTime</value>
+  </data>
+  <data name="BasicSaveDate" xml:space="preserve">
+    <value>SaveDate</value>
+  </data>
+  <data name="BasicTreasureCount" xml:space="preserve">
+    <value>TreasureCount</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="InfoExcel" type="System.Resources.ResXFileRef, System.Windows.Forms">

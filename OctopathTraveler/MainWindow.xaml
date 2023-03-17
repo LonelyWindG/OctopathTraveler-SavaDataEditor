@@ -28,7 +28,7 @@
                 <Button Width="32" Height="32" Click="ToolBarFileOpen_Click" ToolTip="{x:Static properties:Resources.ToolTipOpen}">
                     <Image Source="/Resource/Open.png"/>
                 </Button>
-                <Button Name="TopBar_ButtonSave" Width="32" Height="32" Click="ToolBarFileSave_Click" ToolTip="{x:Static properties:Resources.ToolTipSave}" IsCancel="True">
+                <Button Name="TopBar_ButtonSave" Width="32" Height="32" Click="ToolBarFileSave_Click" ToolTip="{x:Static properties:Resources.ToolTipSave}">
                     <Image Source="/Resource/Save.png"/>
                 </Button>
                 <Button Width="32" Height="32" Click="MenuItemFileSaveAsJson_Click" ToolTip="{x:Static properties:Resources.ToolTipSaveAsJson}">
@@ -46,23 +46,40 @@
                     </TabItem.Resources>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="200"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition Height="13*"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
-                        <Label Content="{x:Static properties:Resources.BacisMoney}"/>
-                        <TextBox Grid.Column="1" Text="{Binding Money, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Label Grid.Row="1" Content="{x:Static properties:Resources.BasicHero}"/>
-                        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Info.CharaNames}" DisplayMemberPath="Name"
-                                  SelectedIndex="{Binding Hero, Converter={StaticResource HeroIDConverter}}"/>
+                        <Label Grid.Row="0" Content="{x:Static properties:Resources.BasicPlayTime}" VerticalAlignment="Center"/>
+                        <Label Grid.Row="1" Content="{x:Static properties:Resources.BasicSaveDate}" VerticalAlignment="Center"/>
+                        <Label Grid.Row="0" Grid.Column="1" Content="{Binding BasicData.PlayTime}" Margin="-4,0,0,0" VerticalAlignment="Center"/>
+                        <Label Grid.Row="1" Grid.Column="1" Content="{Binding BasicData.SaveDate}" Margin="-4,0,0,0" VerticalAlignment="Center"/>
+                        <Label Grid.Row="2" Content="{x:Static properties:Resources.BasicMoney}" VerticalAlignment="Center"/>
+                        <Label Grid.Row="3" Content="{x:Static properties:Resources.BasicHero}" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding BasicData.Money, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+                        <ComboBox Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Info.CharaNames}" DisplayMemberPath="Name" VerticalContentAlignment="Center"
+                                  SelectedIndex="{Binding BasicData.Hero, Converter={StaticResource HeroIDConverter}}"/>
+                        <Label Grid.Row="4" VerticalAlignment="Bottom">
+                            <TextBlock FontSize="15" FontWeight="Bold" TextWrapping="Wrap" Text="{x:Static properties:Resources.BasicAchievementProgress}"/>
+                        </Label>
+                        <Label Grid.Row="5" Content="{x:Static properties:Resources.BasicBattleCount}" VerticalAlignment="Center"/>
+                        <Label Grid.Row="6" Content="{x:Static properties:Resources.BasicEscapeCount}" VerticalAlignment="Center"/>
+                        <Label Grid.Row="7" Content="{x:Static properties:Resources.BasicTreasureCount}" VerticalAlignment="Center"/>
+                        <Label Grid.Row="8" Content="{x:Static properties:Resources.BasicHiddenPointCount}" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding BasicData.BattleCount, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+                        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding BasicData.EscapeCount, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+                        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding BasicData.TreasureCount, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+                        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding BasicData.HiddenPointCount, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="{x:Static properties:Resources.TabItemCharacter}">
