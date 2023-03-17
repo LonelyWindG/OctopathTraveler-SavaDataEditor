@@ -7,7 +7,7 @@
 
 ## 概要
 
-适用于Steam, Xbox PC, Nintendo Switch
+适用于Steam, Xbox PC, Nintendo Switch的八方旅人游戏存档
 
 ## 语言
 
@@ -16,6 +16,7 @@
 ## 游戏官网
 
 https://octopathtraveler.nintendo.com/
+
 http://www.jp.square-enix.com/octopathtraveler/
 
 ## 运行要求
@@ -45,3 +46,4 @@ http://www.jp.square-enix.com/octopathtraveler/
   * [八方旅人宝箱状态对照表 - Google表格](https://docs.google.com/spreadsheets/d/1WGN0166crI5IbnJ4QADnLiNHrL2FUr0MVFqmWH7dBRg)
   * [八方旅人宝箱状态对照说明 - 百度贴吧](https://tieba.baidu.com/p/7822253075)
   * [八方旅人怪物ID对照表 - Google表格](https://docs.google.com/spreadsheets/d/1O1OYHmLNsUcak5dByXbmEFDaxIbp-mDSHGC6j92P5ho)
+  * [GVAS游戏存档转换工具](https://github.com/januwA/gvas-converter)
