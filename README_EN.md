@@ -1,27 +1,29 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/p0qp4jhksi2j0ktq?svg=true)](https://ci.appveyor.com/project/turtle-insect/octopathtraveler)
+# OCTOPATH TRAVELER SaveData Editor
 
-# Donation
-<a href="https://www.buymeacoffee.com/06yi7RLlT" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/black_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+[![GitHub release](https://img.shields.io/github/v/release/LonelyWindG/OctopathTraveler-SavaDataEditor?style=for-the-badge)](https://github.com/LonelyWindG/OctopathTraveler-SavaDataEditor/releases/latest)
+[![GitHub all releases](https://img.shields.io/github/downloads/turtle-insect/OctopathTraveler/total?style=for-the-badge&color=00B000)](https://github.com/LonelyWindG/OctopathTraveler-SavaDataEditor/releases)
+[![GPLv3 license](https://img.shields.io/github/license/LonelyWindG/OctopathTraveler-SavaDataEditor?style=for-the-badge&color=blue)](https://github.com/LonelyWindG/OctopathTraveler-SavaDataEditor/blob/main/LICENSE)
+[![Donate](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-orange?style=for-the-badge&logo=buymeacoffee)](https://www.buymeacoffee.com/06yi7RLlT)
 
-# 言語
+## Language
 [日本語](README_JA.md) [中文](README.md)
 
-# Overview
-Nintendo Switch OCTOPATH TRAVELER save data editing tool
+## Overview
+Available for Steam, Xbox PC, Nintendo Switch
 
-# Official Game Site
+## Official Game Site
 https://octopathtraveler.nintendo.com/
 
-# Prerequisites
+## Prerequisites
 * Windows machine
 * .NET Desktop Runtime 6.0
-* Octopath Traveler save file
+* Octopath Traveler SaveData file
 
-# Build environment
+## Build environment
 * Windows 10 (64 bit)
 * Visual Studio 2022
 
-# Steps to edit
+# Steps to edit for Nintendo Switch
 * Acquire save data from Nintendo Switch console.
 * You should have a set of files that look similar to this:
       * KSSaveData1(KSSaveData2、KSSaveData3、、、)
