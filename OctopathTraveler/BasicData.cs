@@ -67,7 +67,7 @@ namespace OctopathTraveler
 
             gvas.AppendValue(Util.FindFirstAddress("PlayTime", soltDataAddress));
             var playTime = new TimeSpan(gvas.ReadNumber("PlayTime") * TimeSpan.TicksPerSecond);
-            PlayTime = $"{(int)playTime.TotalHours}:{playTime.Minutes}:{playTime.Seconds}";
+            PlayTime = $"{(int)playTime.TotalHours}:{playTime.Minutes:D2}:{playTime.Seconds:D2}";
 
             gvas.AppendValue(Util.FindFirstAddress("Money_", 0));
             _moneyAddress = gvas.Key("Money").Address;
