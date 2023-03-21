@@ -2,7 +2,7 @@
 
 [![GitHub release](https://img.shields.io/github/v/release/LonelyWindG/OctopathTraveler-SavaDataEditor?style=for-the-badge)](https://github.com/LonelyWindG/OctopathTraveler-SavaDataEditor/releases/latest)
 [![GitHub all releases](https://img.shields.io/github/downloads/turtle-insect/OctopathTraveler/total?style=for-the-badge&color=00B000)](https://github.com/LonelyWindG/OctopathTraveler-SavaDataEditor/releases)
-[![GPLv3 license](https://img.shields.io/github/license/LonelyWindG/OctopathTraveler-SavaDataEditor?style=for-the-badge&color=blue)](https://github.com/LonelyWindG/OctopathTraveler-SavaDataEditor/blob/main/LICENSE)
+[![GPLv3 license](https://img.shields.io/github/license/LonelyWindG/OctopathTraveler-SavaDataEditor?style=for-the-badge&color=blue)](https://github.com/LonelyWindG/OctopathTraveler-SavaDataEditor/blob/master/LICENSE)
 
 ## Language
 [日本語](README_JA.md) [中文](README.md)
