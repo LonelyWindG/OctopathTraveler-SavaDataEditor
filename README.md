@@ -3,11 +3,10 @@
 [![GitHub release](https://img.shields.io/github/v/release/LonelyWindG/OctopathTraveler-SavaDataEditor?style=for-the-badge)](https://github.com/LonelyWindG/OctopathTraveler-SavaDataEditor/releases/latest)
 [![GitHub all releases](https://img.shields.io/github/downloads/turtle-insect/OctopathTraveler/total?style=for-the-badge&color=00B000)](https://github.com/LonelyWindG/OctopathTraveler-SavaDataEditor/releases)
 [![GPLv3 license](https://img.shields.io/github/license/LonelyWindG/OctopathTraveler-SavaDataEditor?style=for-the-badge&color=blue)](https://github.com/LonelyWindG/OctopathTraveler-SavaDataEditor/blob/main/LICENSE)
-[![Donate](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-orange?style=for-the-badge&logo=buymeacoffee)](https://www.buymeacoffee.com/06yi7RLlT)
 
 ## 概要
 
-适用于Steam, Xbox PC, Nintendo Switch的八方旅人游戏存档
+适用于Steam, Xbox PC, Nintendo Switch等平台的八方旅人游戏存档
 
 ## 语言
 
