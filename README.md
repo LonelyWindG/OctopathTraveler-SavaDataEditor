@@ -2,7 +2,7 @@
 
 [![GitHub release](https://img.shields.io/github/v/release/LonelyWindG/OctopathTraveler-SaveDataEditor?style=for-the-badge)](https://github.com/LonelyWindG/OctopathTraveler-SaveDataEditor/releases/latest)
 [![GitHub all releases](https://img.shields.io/github/downloads/turtle-insect/OctopathTraveler/total?style=for-the-badge&color=00B000)](https://github.com/LonelyWindG/OctopathTraveler-SaveDataEditor/releases)
-[![GPLv3 license](https://img.shields.io/github/license/LonelyWindG/OctopathTraveler-SaveDataEditor?style=for-the-badge&color=blue)](https://github.com/LonelyWindG/OctopathTraveler-SaeaDateEditor/blob/master/LICENSE)
+[![GPLv3 license](https://img.shields.io/github/license/LonelyWindG/OctopathTraveler-SaveDataEditor?style=for-the-badge&color=blue)](https://github.com/LonelyWindG/OctopathTraveler-SaveDateEditor/blob/master/LICENSE)
 
 ## 概要
 
