@@ -1,8 +1,8 @@
 # 八方旅人存档编辑器
 
-[![GitHub release](https://img.shields.io/github/v/release/LonelyWindG/OctopathTraveler-SavaDataEditor?style=for-the-badge)](https://github.com/LonelyWindG/OctopathTraveler-SavaDataEditor/releases/latest)
-[![GitHub all releases](https://img.shields.io/github/downloads/turtle-insect/OctopathTraveler/total?style=for-the-badge&color=00B000)](https://github.com/LonelyWindG/OctopathTraveler-SavaDataEditor/releases)
-[![GPLv3 license](https://img.shields.io/github/license/LonelyWindG/OctopathTraveler-SavaDataEditor?style=for-the-badge&color=blue)](https://github.com/LonelyWindG/OctopathTraveler-SavaDataEditor/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/v/release/LonelyWindG/OctopathTraveler-SaveDataEditor?style=for-the-badge)](https://github.com/LonelyWindG/OctopathTraveler-SaveDataEditor/releases/latest)
+[![GitHub all releases](https://img.shields.io/github/downloads/turtle-insect/OctopathTraveler/total?style=for-the-badge&color=00B000)](https://github.com/LonelyWindG/OctopathTraveler-SaveDataEditor/releases)
+[![GPLv3 license](https://img.shields.io/github/license/LonelyWindG/OctopathTraveler-SaveDataEditor?style=for-the-badge&color=blue)](https://github.com/LonelyWindG/OctopathTraveler-SaeaDateEditor/blob/master/LICENSE)
 
 ## 概要
 
