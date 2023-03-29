@@ -45,4 +45,5 @@ http://www.jp.square-enix.com/octopathtraveler/
   * [八方旅人宝箱状态对照表 - Google表格](https://docs.google.com/spreadsheets/d/1WGN0166crI5IbnJ4QADnLiNHrL2FUr0MVFqmWH7dBRg)
   * [八方旅人宝箱状态对照说明 - 百度贴吧](https://tieba.baidu.com/p/7822253075)
   * [八方旅人怪物ID对照表 - Google表格](https://docs.google.com/spreadsheets/d/1O1OYHmLNsUcak5dByXbmEFDaxIbp-mDSHGC6j92P5ho)
+  * [【成就心得】學者 X 戰略家、收藏家、滴水不漏](https://forum.gamer.com.tw/C.php?bsn=31593&snA=585)
   * [GVAS游戏存档转换工具](https://github.com/januwA/gvas-converter)
