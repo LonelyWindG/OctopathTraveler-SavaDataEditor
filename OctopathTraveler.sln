@@ -7,13 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctopathTraveler", "Octopat
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug_ReadonlyMode|Any CPU = Debug_ReadonlyMode|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{743327B0-C335-4575-AC5D-F59B2680BCF7}.Debug_ReadonlyMode|Any CPU.ActiveCfg = Debug_ReadonlyMode|Any CPU
-		{743327B0-C335-4575-AC5D-F59B2680BCF7}.Debug_ReadonlyMode|Any CPU.Build.0 = Debug_ReadonlyMode|Any CPU
 		{743327B0-C335-4575-AC5D-F59B2680BCF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{743327B0-C335-4575-AC5D-F59B2680BCF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{743327B0-C335-4575-AC5D-F59B2680BCF7}.Release|Any CPU.ActiveCfg = Release|Any CPU

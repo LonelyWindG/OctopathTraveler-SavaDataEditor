@@ -20,7 +20,6 @@ namespace OctopathTraveler
         public string ChestProgress => $"{chest}/{Info.Chest}";
         public string HiddenItemProgress => $"{hiddenItem}/{Info.HiddenItem}";
 
-
         public uint Summation => summation;
         public uint Chest => chest;
         public uint HiddenItem => hiddenItem;

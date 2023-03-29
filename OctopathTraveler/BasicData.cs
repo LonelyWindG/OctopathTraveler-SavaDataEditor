@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Diagnostics;
 
 namespace OctopathTraveler
 {
@@ -52,6 +52,8 @@ namespace OctopathTraveler
             set => Util.WriteNumber(_hiddenPointCountAddress, 4, value, 0, 152);
         }
 
+        public string ItemCount { get; private set; } = "0/579";
+
         public BasicData()
         {
             var save = SaveData.Instance();
@@ -87,6 +89,29 @@ namespace OctopathTraveler
 
             gvas.AppendValue(Util.FindFirstAddress("HiddenPointCount", achievementAddress));
             _hiddenPointCountAddress = gvas.Key("HiddenPointCount").Address;
+
+            gvas = new GVAS(null);
+            gvas.AppendValue(Util.FindFirstAddress("ItemFlag", achievementAddress));
+
+            int itemCount = 0;
+            int flagIndex = 0;
+            string flagKey = "ItemFlag_" + flagIndex;
+            while (gvas.HasKey(flagKey))
+            {
+                uint flags = gvas.ReadNumber(flagKey);
+                for (int i = 0; i < 32; i++)
+                {
+                    if (((flags >> i) & 1) == 1)
+                    {
+                        itemCount++;
+                    }
+                }
+
+                flagIndex++;
+                flagKey = "ItemFlag_" + flagIndex;
+            }
+
+            ItemCount = itemCount + "/579";
         }
     }
 }

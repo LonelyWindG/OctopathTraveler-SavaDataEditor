@@ -16,39 +16,9 @@ namespace OctopathTraveler
     {
         public MainWindow()
         {
-#if !DEBUG
-            Application.Current.DispatcherUnhandledException += OnDispatcherUnhandledException;
-#endif
             InitializeComponent();
             TopBar_ButtonSave.Visibility = SaveData.IsReadonlyMode ? Visibility.Collapsed : Visibility.Visible;
-        }
-
-        private static void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
-        {
-            try
-            {
-                if (e.Handled)
-                    return;
-
-                HandleException(e.Exception);
-            }
-            finally
-            {
-                e.Handled = true;
-            }
-        }
-
-        private static void HandleException(Exception exception)
-        {
-            string ex = exception.ToString();
-            try
-            {
-                File.AppendAllText("exception.log", DateTime.Now.ToString() + "\n" + ex + "\n");
-            }
-            catch (Exception)
-            {
-            }
-            MessageBox.Show(ex, "Program Exception");
+            SetBasicItemCountTip();
         }
 
         private void Window_PreviewDragOver(object sender, DragEventArgs e)
@@ -164,6 +134,7 @@ namespace OctopathTraveler
         {
             SetWeakFilter(0);
             SetTreasureStateFilter(0);
+            _itemInventoryFilter = 0;
             DataContext = new DataContext();
             TopBar_LoadedInfoFile.Content = Info.LoadedInfoFile;
         }
@@ -464,6 +435,88 @@ namespace OctopathTraveler
             MessageBox.Show(text, "Progress");
         }
 
+        private int _itemInventoryFilter;
+
+        private void ButtonItemInventoryFilter_Click(object sender, EventArgs e)
+        {
+            if (DataContext is not DataContext dataContext)
+                return;
+
+            var collectionView = CollectionViewSource.GetDefaultView(dataContext.Info.ItemInventory);
+            if (_itemInventoryFilter > 0)
+            {
+                _itemInventoryFilter = 0;
+                collectionView.Filter = null;
+            }
+            else if (_itemInventoryFilter < 0)
+            {
+                _itemInventoryFilter = 1;
+                collectionView.Filter = obj => ((InventoryItemInfo)obj).IsOwned;
+            }
+            else
+            {
+                _itemInventoryFilter = -1;
+                collectionView.Filter = obj => !((InventoryItemInfo)obj).IsOwned;
+            }
+        }
+
+        private void ButtonItemInventoryExport_Click(object sender, EventArgs e)
+        {
+            if (DataContext == null)
+                return;
+
+            string name;
+            Func<InventoryItemInfo, bool> filter = null;
+            bool isAppendState = false;
+            if (_itemInventoryFilter == 0)
+            {
+                name = "item_inventory";
+                isAppendState = true;
+            }
+            else if (_itemInventoryFilter > 0)
+            {
+                name = "item_owned";
+                filter = info => info.IsOwned;
+            }
+            else
+            {
+                name = "item_unowned";
+                filter = info => !info.IsOwned;
+            }
+            var saveDialog = new SaveFileDialog
+            {
+                InitialDirectory = Directory.GetCurrentDirectory(),
+                FileName = name + ".txt",
+                Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*"
+            };
+            if (saveDialog.ShowDialog() == false)
+                return;
+
+            var builder = new StringBuilder(1024);
+            foreach (var item in Info.Instance().ItemInventory)
+            {
+                if (filter != null && !filter(item))
+                    continue;
+
+                builder.Append(item.Value);
+                builder.Append('\t');
+                builder.Append(item.TypeAndIndex);
+                builder.Append('\t');
+                if (isAppendState && !item.IsOwned)
+                {
+                    builder.Append(item.Name);
+                    builder.Append('\t');
+                    builder.AppendLine("🚫");
+                }
+                else
+                {
+                    builder.AppendLine(item.Name);
+                }
+            }
+            File.WriteAllText(saveDialog.FileName, builder.ToString());
+            MessageBox.Show(MessageSaveSuccess);
+        }
+
         private void MenuItemTreasureStateAll_Click(object sender, RoutedEventArgs e)
         {
             SetTreasureStateFilter(0);
@@ -494,6 +547,37 @@ namespace OctopathTraveler
                 collectionView.Filter = obj => !((TreasureState)obj).IsCollectAll;
             else
                 collectionView.Filter = null;
+        }
+
+        private void SetBasicItemCountTip()
+        {
+            static void AppendLine(StringBuilder builder, int count, string type)
+            {
+                builder.Append(count);
+                builder.Append('\t');
+                builder.Append(type);
+                builder.Append('\n');
+            }
+
+            var tipBuilder = new StringBuilder(256);
+
+            AppendLine(tipBuilder, 122, TabItemItems);
+            AppendLine(tipBuilder, 33, ItemSword);
+            AppendLine(tipBuilder, 29, ItemLance);
+            AppendLine(tipBuilder, 29, ItemDagger);
+            AppendLine(tipBuilder, 33, ItemAxe);
+            AppendLine(tipBuilder, 30, ItemBow);
+            AppendLine(tipBuilder, 32, ItemRod);
+            AppendLine(tipBuilder, 18, ItemShield);
+            AppendLine(tipBuilder, 42, ItemHead);
+            AppendLine(tipBuilder, 50, ItemBody);
+            AppendLine(tipBuilder, 37, ItemAccessory);
+            AppendLine(tipBuilder, 16, ItemMaterial);
+            AppendLine(tipBuilder, 17, ItemValuableTip);
+            AppendLine(tipBuilder, 61, ItemKnowledgeTip);
+
+            tipBuilder.Remove(tipBuilder.Length - 1, 1);
+            LabelBasicItemCount.ToolTip = tipBuilder.ToString();
         }
     }
 }

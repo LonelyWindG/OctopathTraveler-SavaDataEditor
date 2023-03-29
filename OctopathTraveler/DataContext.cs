@@ -33,17 +33,26 @@ namespace OctopathTraveler
                 Charactors.Add(chara);
             }
 
+            int zeroIdCount = 0;
+            var ownedItemIds = new HashSet<uint>();
             var items = new List<Item>(Info.Instance().Items.Count);
             foreach (var address in save.FindAddress("ItemID_", 0))
             {
                 var item = new Item(address);
-                if (item.ID == 0)
+                if (item.ID == 0 && zeroIdCount++ > 8)
                     continue;
 
                 items.Add(item);
+                if (item.Count > 0)
+                    ownedItemIds.Add(item.ID);
             }
             items.Sort((x, y) => x.ID.CompareTo(y.ID));
             Items = new ObservableCollection<Item>(items);
+
+            foreach (var item in Info.ItemInventory)
+            {
+                item.IsOwned = ownedItemIds.Contains(item.Value);
+            }
 
             var gvas = new GVAS(null);
             gvas.AppendValue(save.FindAddress("MainMemberID_", 0).First());
@@ -87,18 +96,17 @@ namespace OctopathTraveler
                 var data = gvas.Key("VisitedMap_" + i.ToString());
                 for (uint size = 0; size < data.Size; size++)
                 {
-                    for (uint bit = 0; bit < 8; bit++)
+                    for (uint bit = 0; bit < 8; bit++, id++)
                     {
                         if (id < 12)//Ignore the first 12, as these values are all 0
-                        {
-                            id++;
                             continue;
-                        }
 
                         var info = Info.Search(Info.Instance().Places, id);
-                        var place = new Place(data.Address + size, bit, info?.Name ?? $"{id}(0x{id:X})({data.Address + size + bit})");
-                        Places.Add(place);
-                        id++;
+                        uint placeAddress = data.Address + size;
+                        if (info == null && !Place.IsVisit(placeAddress, bit))
+                            continue;
+
+                        Places.Add(new Place(placeAddress, bit, info ?? new PlaceInfo { Value = id, Name = "UNKNOWN" }));
                     }
                 }
             }
@@ -118,15 +126,13 @@ namespace OctopathTraveler
                 //gvas.AppendValue(treasures[i]);
                 uint tid = checked((uint)((int)treasures[i] - diff));
                 var info = Info.Search(Info.Instance().TreasureStates, tid);
+#if DEBUG
+                info ??= new TreasureStateInfo { Value = tid };
+#endif
                 if (info == null)
                     continue;
 
                 uint treausreAddress = treasures[i] + 100;
-                if (tid == 1277013)
-                {
-                    Trace.Write($"{i + 1}/{treasures.Count}");
-                }
-
                 //var data = gvas.Key("TreasureStateArray_" + i);
                 var treasure = new TreasureState(treausreAddress, info);
                 TreasureStates.Add(treasure);

@@ -1,23 +1,28 @@
-﻿namespace OctopathTraveler
+namespace OctopathTraveler
 {
-    class Place
+	class Place
 	{
 		private readonly uint mAddress;
 		private readonly uint mBit;
 
-		public Place(uint address, uint bit, string name)
+		public Place(uint address, uint bit, PlaceInfo info)
 		{
 			mAddress = address;
 			mBit = bit;
-			Name = name;
+            Info = info;
 		}
 
-		public string Name { get; }
+		public PlaceInfo Info { get;}
 
-		public bool Visit
+        public bool Visit
 		{
-			get { return SaveData.Instance().ReadBit(mAddress, mBit); }
-			set { SaveData.Instance().WriteBit(mAddress, mBit, value); }
+			get => IsVisit(mAddress, mBit);
+			set => SaveData.Instance().WriteBit(mAddress, mBit, value);
 		}
+
+		public static bool IsVisit(uint address, uint bit)
+		{
+            return SaveData.Instance().ReadBit(address, bit);
+        }
 	}
 }

@@ -6,11 +6,7 @@ namespace OctopathTraveler
 {
     class SaveData
     {
-#if DEBUG_READONLYMODE
-        public static readonly bool IsReadonlyMode = true;
-#else
-        public static readonly bool IsReadonlyMode = false;
-#endif
+        public static bool IsReadonlyMode = false;
 
         private static SaveData mThis;
         private string mFileName = null;

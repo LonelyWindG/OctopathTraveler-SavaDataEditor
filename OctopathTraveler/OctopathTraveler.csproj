@@ -9,14 +9,10 @@
     <ApplicationIcon>Resource\Icon.ico</ApplicationIcon>
     <AnalysisLevel>6.0</AnalysisLevel>
     <Nullable>annotations</Nullable>
-    <Configurations>Debug;Release;Debug_ReadonlyMode</Configurations>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_ReadonlyMode|AnyCPU'">
-    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
-    <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>

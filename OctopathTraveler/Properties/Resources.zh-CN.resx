@@ -304,4 +304,38 @@
   <data name="BasicTreasureCount" xml:space="preserve">
     <value>宝箱数量</value>
   </data>
+  <data name="ItemAccessory" xml:space="preserve">
+    <value>饰品</value>
+  </data>
+  <data name="ItemKnowledgeTip" xml:space="preserve">
+    <value>情报(收藏家成就好像不需要这个)</value>
+  </data>
+  <data name="ItemMaterial" xml:space="preserve">
+    <value>调和素材</value>
+  </data>
+  <data name="ItemValuableTip" xml:space="preserve">
+    <value>贵重物品(仅一部分, 不是全部)</value>
+  </data>
+  <data name="BasicItemCount" xml:space="preserve">
+    <value>道具数量</value>
+  </data>
+  <data name="ButtonExport" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="ButtonSwitchFilter" xml:space="preserve">
+    <value>切换筛选</value>
+  </data>
+  <data name="TabItemItemInventory" xml:space="preserve">
+    <value>道具收集列表</value>
+  </data>
+  <data name="TabItemItemInventoryTip" xml:space="preserve">
+    <value>复选框仅用于展示, 并不会修改存档;
+道具ID为0表示不知道这个道具的ID, 无法从存档中得知是否已拥有</value>
+  </data>
+  <data name="ItemKnowledge" xml:space="preserve">
+    <value>情报</value>
+  </data>
+  <data name="ItemValuable" xml:space="preserve">
+    <value>贵重物品</value>
+  </data>
 </root>

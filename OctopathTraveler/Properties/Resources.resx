@@ -132,6 +132,9 @@
   <data name="BasicHiddenPointCount" xml:space="preserve">
     <value>HiddenPointCount</value>
   </data>
+  <data name="BasicItemCount" xml:space="preserve">
+    <value>ItemCount</value>
+  </data>
   <data name="BasicMoney" xml:space="preserve">
     <value>Money</value>
   </data>
@@ -144,9 +147,18 @@
   <data name="BasicTreasureCount" xml:space="preserve">
     <value>TreasureCount</value>
   </data>
+  <data name="ButtonExport" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="ButtonSwitchFilter" xml:space="preserve">
+    <value>SwitchFilter</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="InfoExcel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resource\info.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ItemAccessory" xml:space="preserve">
+    <value>Accessory</value>
   </data>
   <data name="ItemAccessory1" xml:space="preserve">
     <value>Accessory1</value>
@@ -190,11 +202,20 @@
   <data name="ItemIce" xml:space="preserve">
     <value>Ice</value>
   </data>
+  <data name="ItemKnowledge" xml:space="preserve">
+    <value>Knowledge</value>
+  </data>
+  <data name="ItemKnowledgeTip" xml:space="preserve">
+    <value>Knowledge (Achievements don't require collecting these (maybe))</value>
+  </data>
   <data name="ItemLance" xml:space="preserve">
     <value>Lance</value>
   </data>
   <data name="ItemLight" xml:space="preserve">
     <value>Light</value>
+  </data>
+  <data name="ItemMaterial" xml:space="preserve">
+    <value>Material</value>
   </data>
   <data name="ItemRod" xml:space="preserve">
     <value>Rod</value>
@@ -207,6 +228,12 @@
   </data>
   <data name="ItemThunder" xml:space="preserve">
     <value>Thunder</value>
+  </data>
+  <data name="ItemValuable" xml:space="preserve">
+    <value>Valuable</value>
+  </data>
+  <data name="ItemValuableTip" xml:space="preserve">
+    <value>Valuable (Part of it, not all of it)</value>
   </data>
   <data name="ItemWind" xml:space="preserve">
     <value>Wind</value>
@@ -255,6 +282,13 @@
   </data>
   <data name="TabItemCharacter" xml:space="preserve">
     <value>Character</value>
+  </data>
+  <data name="TabItemItemInventory" xml:space="preserve">
+    <value>Inventory (Owned or unowned)</value>
+  </data>
+  <data name="TabItemItemInventoryTip" xml:space="preserve">
+    <value>The check box is only for display, and will not modify the "save data";
+If the item ID is 0, it means that the ID of the item is not known, and it is impossible to know whether it is already owned from the "save data".</value>
   </data>
   <data name="TabItemItems" xml:space="preserve">
     <value>Items</value>

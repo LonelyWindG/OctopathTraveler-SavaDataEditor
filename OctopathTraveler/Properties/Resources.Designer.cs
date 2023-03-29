@@ -106,6 +106,15 @@ namespace OctopathTraveler.Properties {
         }
         
         /// <summary>
+        ///   查找类似 ItemCount 的本地化字符串。
+        /// </summary>
+        public static string BasicItemCount {
+            get {
+                return ResourceManager.GetString("BasicItemCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Money 的本地化字符串。
         /// </summary>
         public static string BasicMoney {
@@ -142,12 +151,39 @@ namespace OctopathTraveler.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Export 的本地化字符串。
+        /// </summary>
+        public static string ButtonExport {
+            get {
+                return ResourceManager.GetString("ButtonExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 SwitchFilter 的本地化字符串。
+        /// </summary>
+        public static string ButtonSwitchFilter {
+            get {
+                return ResourceManager.GetString("ButtonSwitchFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
         public static byte[] InfoExcel {
             get {
                 object obj = ResourceManager.GetObject("InfoExcel", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Accessory 的本地化字符串。
+        /// </summary>
+        public static string ItemAccessory {
+            get {
+                return ResourceManager.GetString("ItemAccessory", resourceCulture);
             }
         }
         
@@ -278,6 +314,24 @@ namespace OctopathTraveler.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Knowledge 的本地化字符串。
+        /// </summary>
+        public static string ItemKnowledge {
+            get {
+                return ResourceManager.GetString("ItemKnowledge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Knowledge (Achievements don&apos;t require collecting these (maybe)) 的本地化字符串。
+        /// </summary>
+        public static string ItemKnowledgeTip {
+            get {
+                return ResourceManager.GetString("ItemKnowledgeTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Lance 的本地化字符串。
         /// </summary>
         public static string ItemLance {
@@ -292,6 +346,15 @@ namespace OctopathTraveler.Properties {
         public static string ItemLight {
             get {
                 return ResourceManager.GetString("ItemLight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Material 的本地化字符串。
+        /// </summary>
+        public static string ItemMaterial {
+            get {
+                return ResourceManager.GetString("ItemMaterial", resourceCulture);
             }
         }
         
@@ -328,6 +391,24 @@ namespace OctopathTraveler.Properties {
         public static string ItemThunder {
             get {
                 return ResourceManager.GetString("ItemThunder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Valuable 的本地化字符串。
+        /// </summary>
+        public static string ItemValuable {
+            get {
+                return ResourceManager.GetString("ItemValuable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Valuable (Part of it, not all of it) 的本地化字符串。
+        /// </summary>
+        public static string ItemValuableTip {
+            get {
+                return ResourceManager.GetString("ItemValuableTip", resourceCulture);
             }
         }
         
@@ -472,6 +553,25 @@ namespace OctopathTraveler.Properties {
         public static string TabItemCharacter {
             get {
                 return ResourceManager.GetString("TabItemCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Inventory (Owned or unowned) 的本地化字符串。
+        /// </summary>
+        public static string TabItemItemInventory {
+            get {
+                return ResourceManager.GetString("TabItemItemInventory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 The check box is only for display, and will not modify the &quot;save data&quot;;
+        ///If the item ID is 0, it means that the ID of the item is not known, and it is impossible to know whether it is already owned from the &quot;save data&quot;. 的本地化字符串。
+        /// </summary>
+        public static string TabItemItemInventoryTip {
+            get {
+                return ResourceManager.GetString("TabItemItemInventoryTip", resourceCulture);
             }
         }
         

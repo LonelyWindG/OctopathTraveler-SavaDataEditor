@@ -5,8 +5,8 @@ namespace OctopathTraveler
 {
     class NameValueInfo : IRowParser
     {
-        public uint Value { get; private set; }
-        public string Name { get; private set; }
+        public uint Value { get; set; }
+        public string Name { get; set; }
 
         public virtual bool CheckHeaderRow(IDictionary<string, object> row)
         {

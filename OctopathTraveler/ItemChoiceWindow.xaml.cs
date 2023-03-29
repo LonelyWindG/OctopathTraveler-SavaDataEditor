@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace OctopathTraveler
 {
-	/// <summary>
-	/// ItemChoiceWindow.xaml の相互作用ロジック
-	/// </summary>
-	public partial class ItemChoiceWindow : Window
+    /// <summary>
+    /// ItemChoiceWindow.xaml の相互作用ロジック
+    /// </summary>
+    public partial class ItemChoiceWindow : Window
 	{
 		public uint ID { get; set; }
 
@@ -52,28 +51,46 @@ namespace OctopathTraveler
 
 		private void ButtonDecision_Click(object sender, RoutedEventArgs e)
 		{
-			NameValueInfo info = ListBoxItem.SelectedItem as NameValueInfo;
-			if (info == null) return;
-			ID = info.Value;
+            if (ListBoxItem.SelectedItem is not NameValueInfo info) return;
+            ID = info.Value;
 			Close();
 		}
 
-		private void CreateItemList(String filter)
+		private void CreateItemList(string filter)
 		{
 			ListBoxItem.Items.Clear();
-			List<NameValueInfo> items = Info.Instance().Equipments;
-			if(Type==eType.item)
+			var items = Type == eType.item ? Info.Instance().Items : Info.Instance().Equipments;
+			if (string.IsNullOrWhiteSpace(filter))
 			{
-				items = Info.Instance().Items;
+                foreach (var item in items)
+                {
+					ListBoxItem.Items.Add(item);
+                }
+            }
+			else
+			{
+				if (uint.TryParse(filter, out var filterId))
+				{
+                    foreach (var item in items)
+                    {
+                        if (item.Value == filterId)
+                        {
+                            ListBoxItem.Items.Add(item);
+                        }
+                    }
+				}
+				else
+				{
+                    foreach (var item in items)
+                    {
+                        if (item.Name.Contains(filter, StringComparison.OrdinalIgnoreCase))
+                        {
+                            ListBoxItem.Items.Add(item);
+                        }
+                    }
+                }
 			}
 
-			foreach (var item in items)
-			{
-				if (String.IsNullOrEmpty(filter) || item.Name.IndexOf(filter) >= 0)
-				{
-					ListBoxItem.Items.Add(item);
-				}
-			}
 		}
 	}
 }

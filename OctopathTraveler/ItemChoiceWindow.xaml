@@ -22,7 +22,16 @@
                 <Button x:Name="ButtonDecision" Content="{x:Static properties:Resources.ItemChoiceOK}" IsEnabled="False" Click="ButtonDecision_Click"/>
                 <Button Content="{x:Static properties:Resources.ItemChoiceCancel}" Grid.Column="1" IsCancel="True"/>
             </Grid>
-            <ListBox x:Name="ListBoxItem" SelectionChanged="ListBoxItem_SelectionChanged" DisplayMemberPath="Name"/>
+            <ListBox x:Name="ListBoxItem" SelectionChanged="ListBoxItem_SelectionChanged" VirtualizingStackPanel.VirtualizationMode="Recycling" VirtualizingStackPanel.IsVirtualizing="True">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <VirtualizingStackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Value}" Width="45"/>
+                            <Label Content="{Binding Name}"/>
+                        </VirtualizingStackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </DockPanel>
     </Grid>
 </Window>

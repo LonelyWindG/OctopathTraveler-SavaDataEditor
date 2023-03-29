@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using MiniExcelLibs;
+using OctopathTraveler.Properties;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Windows;
-using MiniExcelLibs;
-using OctopathTraveler.Properties;
 
 namespace OctopathTraveler
 {
@@ -13,11 +12,12 @@ namespace OctopathTraveler
 
         private static Info mThis;
         public List<NameValueInfo> Items { get; private set; } = new List<NameValueInfo>();
+        public List<InventoryItemInfo> ItemInventory { get; private set; } = new List<InventoryItemInfo>();
         public List<NameValueInfo> CharaNames { get; private set; } = new List<NameValueInfo>();
         public List<NameValueInfo> Jobs { get; private set; } = new List<NameValueInfo>();
         public List<NameValueInfo> Equipments { get; private set; } = new List<NameValueInfo>();
         public List<NameValueInfo> Countris { get; private set; } = new List<NameValueInfo>();
-        public List<NameValueInfo> Places { get; private set; } = new List<NameValueInfo>();
+        public List<PlaceInfo> Places { get; private set; } = new List<PlaceInfo>();
         public List<EnemyInfo> Enemies { get; private set; } = new List<EnemyInfo>();
         public List<TameMonsterInfo> TameMonsters { get; private set; } = new List<TameMonsterInfo>();
         public List<TreasureStateInfo> TreasureStates { get; private set; } = new List<TreasureStateInfo>();
@@ -36,7 +36,7 @@ namespace OctopathTraveler
 
         public static string GetNameOrID2Hex<TInfo>(List<TInfo> list, uint id) where TInfo : NameValueInfo, new()
         {
-            return Search(list, id)?.Name ?? $"{id}(0x{id:X})";
+            return id == 0 ? "0" : Search(list, id)?.Name ?? $"{id}(0x{id:X})";
         }
 
         public static TType Search<TType>(List<TType> list, uint id) where TType : NameValueInfo, new()
@@ -55,35 +55,11 @@ namespace OctopathTraveler
 
         private void Init()
         {
-            byte[] excel;
             var culture = Resources.Culture ?? CultureInfo.CurrentUICulture;
-
-            string file = $"info_{culture.Name.ToLower().Replace("-", "_")}.xlsx";
-            if (File.Exists(file))
-            {
-                LoadedInfoFile = "Info Excel Path: " + file.Replace("_", "__");
-                excel = File.ReadAllBytes(file);
-            }
-            else if (File.Exists("info.xlsx"))
-            {
-                LoadedInfoFile = "Info Excel Path: info.xlsx";
-                excel = File.ReadAllBytes("info.xlsx");
-            }
-            else
-            {
-                var resourceSet = Resources.ResourceManager.GetResourceSet(culture, true, false);
-                excel = resourceSet == null ? null : resourceSet.GetObject("InfoExcel") as byte[];
-                if (excel == null)
-                {
-                    resourceSet = Resources.ResourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, false);
-                    excel = resourceSet == null ? null : resourceSet.GetObject("InfoExcel") as byte[];
-                    LoadedInfoFile = "Info Excel Path: Embedded Resource, Language: Unknown";
-                }
-                else
-                {
-                    LoadedInfoFile = "Info Excel Path: Embedded Resource, Language: " + culture.Name;
-                }
-            }
+            byte[] excel = LoadExcel(false, culture);
+            excel ??= LoadExcel(false, null);
+            excel ??= LoadExcel(true, culture);
+            excel ??= LoadExcel(true, null);
 
             if (excel == null || excel.Length <= 0)
             {
@@ -93,6 +69,7 @@ namespace OctopathTraveler
 
             var reader = new ExcelReader(excel);
             reader.AppendListAndOrderByValue("item", Items);
+            reader.AppendList("item_inventory", ItemInventory);
             reader.AppendListAndOrderByValue("character", CharaNames);
             reader.AppendListAndOrderByValue("job", Jobs);
             reader.AppendListAndOrderByValue("equipment", Equipments);
@@ -103,11 +80,42 @@ namespace OctopathTraveler
             reader.AppendListAndOrderByValue("treasure_states", TreasureStates);
         }
 
+        private static byte[] LoadExcel(bool embedded, CultureInfo culture)
+        {
+            bool isSpecificCulture = culture != null && !culture.Name.StartsWith("en", System.StringComparison.OrdinalIgnoreCase);
+            if (embedded)
+            {
+                var resourceSet = Resources.ResourceManager.GetResourceSet(isSpecificCulture ? culture : CultureInfo.InvariantCulture, true, false);
+                LoadedInfoFile = "Info Excel Path: Embedded Resource, Language: en";
+                return resourceSet == null ? null : resourceSet.GetObject("InfoExcel") as byte[];
+            }
+            else if (isSpecificCulture)
+            {
+                string file = $"info_{culture.Name.ToLower().Replace("-", "_")}.xlsx";
+                if (File.Exists(file))
+                {
+                    LoadedInfoFile = "Info Excel Path: " + file.Replace("_", "__");
+                    return File.ReadAllBytes(file);
+                }
+            }
+            else if (File.Exists("info.xlsx"))
+            {
+                LoadedInfoFile = "Info Excel Path: info.xlsx";
+                return File.ReadAllBytes("info.xlsx");
+            }
+            return null;
+        }
+
         public static bool TryGetEmbeddedInfoExcel(out (string, byte[])[] excels)
         {
             var culture = Resources.Culture ?? CultureInfo.CurrentUICulture;
-            var cultureExcel = Resources.ResourceManager.GetResourceSet(culture, true, false)?.GetObject("InfoExcel") as byte[];
             var invariantExcel = Resources.ResourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, false)?.GetObject("InfoExcel") as byte[];
+            if (culture.Name.StartsWith("en", System.StringComparison.OrdinalIgnoreCase))
+            {
+                excels = new[] { ("info.xlsx", invariantExcel) };
+                return true;
+            }
+            var cultureExcel = Resources.ResourceManager.GetResourceSet(culture, true, false)?.GetObject("InfoExcel") as byte[];
             if (invariantExcel != null && cultureExcel != null)
             {
                 excels = new[]
