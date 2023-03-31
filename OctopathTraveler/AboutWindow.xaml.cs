@@ -25,7 +25,7 @@ namespace OctopathTraveler
 
         private void LabelModifier2_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            OpenURL("https://github.com/LonelyWindG/OctopathTraveler-SavaDataEditor");
+            OpenURL("https://github.com/LonelyWindG/OctopathTraveler-SaveDataEditor");
         }
 
         private void LabelDataSource1_MouseDown(object sender, MouseButtonEventArgs e)

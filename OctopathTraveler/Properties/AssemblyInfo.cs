@@ -9,8 +9,8 @@ using System.Windows;
 [assembly: AssemblyDescription("OctopathTraveler SavaDataEditor")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("OctopathTraveler")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyProduct("OctopathTraveler SavaDataEditor")]
+[assembly: AssemblyCopyright("Copyright © 2018-2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

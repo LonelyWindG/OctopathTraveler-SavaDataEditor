@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OctopathTraveler"
         mc:Ignorable="d"
-        Title="About" Height="245" Width="465">
+        Title="About" Height="245" Width="480">
     <Grid>
         <StackPanel>
             <Label Content="Creater : カメムシ"/>
@@ -26,7 +26,7 @@
             <StackPanel Orientation="Horizontal">
                 <Label Margin="0,0,-6,0">Modifier2 :</Label>
                 <Label MouseDown="LabelModifier2_MouseDown">
-                    <TextBlock FontWeight="Bold" TextDecorations="Underline">LonelyWindG/OctopathTraveler-SavaDataEditor</TextBlock>
+                    <TextBlock FontWeight="Bold" TextDecorations="Underline">LonelyWindG/OctopathTraveler-SaveDataEditor(Current Build)</TextBlock>
                 </Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">

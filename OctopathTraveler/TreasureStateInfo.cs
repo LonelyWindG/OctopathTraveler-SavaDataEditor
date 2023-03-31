@@ -11,7 +11,7 @@ namespace OctopathTraveler
 
         public override bool CheckHeaderRow(IDictionary<string, object> row)
         {
-            return base.CheckHeaderRow(row) && row.Count >= 5;
+            return base.CheckHeaderRow(row) && row.Count >= 3;
         }
 
         public override bool Parse(dynamic row)
@@ -21,7 +21,12 @@ namespace OctopathTraveler
 
             string num = (string)(row.C?.ToString());
             if (num == "0" || string.IsNullOrWhiteSpace(num))
-                return false;
+            {
+                Summation = 0;
+                Chest = 0;
+                HiddenItem = 0;
+                return true;
+            }
 
             Summation = Convert.ToUInt32(num);
 

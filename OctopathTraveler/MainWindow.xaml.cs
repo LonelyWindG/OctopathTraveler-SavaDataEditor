@@ -561,6 +561,7 @@ namespace OctopathTraveler
 
             var tipBuilder = new StringBuilder(256);
 
+            tipBuilder.Append("Count\tType\n");
             AppendLine(tipBuilder, 122, TabItemItems);
             AppendLine(tipBuilder, 33, ItemSword);
             AppendLine(tipBuilder, 29, ItemLance);
@@ -578,6 +579,7 @@ namespace OctopathTraveler
 
             tipBuilder.Remove(tipBuilder.Length - 1, 1);
             LabelBasicItemCount.ToolTip = tipBuilder.ToString();
+            ToolTipService.SetInitialShowDelay(LabelBasicItemCount, 150);
         }
     }
 }

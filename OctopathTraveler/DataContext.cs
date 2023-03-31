@@ -128,9 +128,10 @@ namespace OctopathTraveler
                 var info = Info.Search(Info.Instance().TreasureStates, tid);
 #if DEBUG
                 info ??= new TreasureStateInfo { Value = tid };
-#endif
-                if (info == null)
+#else
+                if (info == null || info.Summation == 0)
                     continue;
+#endif
 
                 uint treausreAddress = treasures[i] + 100;
                 //var data = gvas.Key("TreasureStateArray_" + i);
