@@ -26,7 +26,7 @@ http://www.jp.square-enix.com/octopathtraveler/
 * [.NET 桌面运行时 6.0](https://dotnet.microsoft.com/download), [点此下载](https://aka.ms/dotnet/6.0/windowsdesktop-runtime-win-x64.exe)
 * 八方旅人存档文件
   * Steam存档路径`%USERPROFILE%/Documents/My Games/Octopath_Traveler/(数字编号)/SaveGames`, 在SaveGames文件夹里SaveData0对应着游戏的自动存档. SaveData1/2/3对应相应顺序的存档
-  * Xbox PC存档路径`%LOCALAPPDATA%/Packages/39EA002F.FrigateMS_n746a19ndrrjg/SystemAppData/wgs/(一串字母数字)/(一串字母数字)`, 在该文件夹内大小为2099KB的几个文件为每个存档位的存档文件;要快速找到要修改的存档, 可以通过进入游戏内保存一个存档, 此目录内修改日期最近的那个就是
+  * Xbox PC存档路径`%LOCALAPPDATA%/Packages/39EA002F.FrigateMS_n746a19ndrrjg/SystemAppData/wgs/(一串字母数字)/(一串字母数字)`, 在该文件夹内大小为1000多或2000多KB的几个文件为每个存档位的存档文件;要快速找到要修改的存档, 可以通过进入游戏内保存一个存档, 此目录内修改日期最近的那个就是
   * Nintendo Switch, 从机器中导入导出存档
 
 ## Build环境
