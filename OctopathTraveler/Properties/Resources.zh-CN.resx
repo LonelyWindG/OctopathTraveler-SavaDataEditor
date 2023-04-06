@@ -338,4 +338,7 @@
   <data name="ItemValuable" xml:space="preserve">
     <value>贵重物品</value>
   </data>
+  <data name="BasicHiddenPointTip" xml:space="preserve">
+    <value>你必须发现至少一个隐藏道具才能修改此数据</value>
+  </data>
 </root>

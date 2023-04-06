@@ -18,7 +18,7 @@ namespace OctopathTraveler
         {
             InitializeComponent();
             TopBar_ButtonSave.Visibility = SaveData.IsReadonlyMode ? Visibility.Collapsed : Visibility.Visible;
-            SetBasicItemCountTip();
+            SetBasicDataTip();
         }
 
         private void Window_PreviewDragOver(object sender, DragEventArgs e)
@@ -549,7 +549,7 @@ namespace OctopathTraveler
                 collectionView.Filter = null;
         }
 
-        private void SetBasicItemCountTip()
+        private void SetBasicDataTip()
         {
             static void AppendLine(StringBuilder builder, int count, string type)
             {
@@ -580,6 +580,9 @@ namespace OctopathTraveler
             tipBuilder.Remove(tipBuilder.Length - 1, 1);
             LabelBasicItemCount.ToolTip = tipBuilder.ToString();
             ToolTipService.SetInitialShowDelay(LabelBasicItemCount, 150);
+
+            LabelBasicHiddenPointCount.ToolTip = BasicHiddenPointTip;
+            ToolTipService.SetInitialShowDelay(LabelBasicHiddenPointCount, 150);
         }
     }
 }

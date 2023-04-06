@@ -16,6 +16,14 @@ namespace OctopathTraveler
 			return SaveData.Instance().FindAddress(name, index).First();
 		}
 
+		public static bool TryFindFirstAddress(string name, uint index, out uint address)
+		{
+			var addresses = SaveData.Instance().FindAddress(name, index);
+			bool found = addresses.Count > 0;
+			address = found ? addresses[0] : uint.MaxValue;
+			return found;
+        }
+
 		public static uint ReadNumber(this GVASData gvasData)
 		{
 			return SaveData.Instance().ReadNumber(gvasData.Address, gvasData.Size);

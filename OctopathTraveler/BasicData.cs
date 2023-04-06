@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Windows.Data;
 
 namespace OctopathTraveler
 {
@@ -48,9 +49,17 @@ namespace OctopathTraveler
 
         public uint HiddenPointCount
         {
-            get => SaveData.Instance().ReadNumber(_hiddenPointCountAddress, 4);
-            set => Util.WriteNumber(_hiddenPointCountAddress, 4, value, 0, 152);
+            get => IsExistHiddenPointCount ? SaveData.Instance().ReadNumber(_hiddenPointCountAddress, 4) : 0;
+            set
+            {
+                if (IsExistHiddenPointCount)
+                    return;
+
+                Util.WriteNumber(_hiddenPointCountAddress, 4, value, 0, 152);
+            }
         }
+
+        public bool IsExistHiddenPointCount { get; private set; }
 
         public string ItemCount { get; private set; } = "0/579";
 
@@ -87,8 +96,12 @@ namespace OctopathTraveler
             gvas.AppendValue(Util.FindFirstAddress("TreasureCount", achievementAddress));
             _treasureCountAddress = gvas.Key("TreasureCount").Address;
 
-            gvas.AppendValue(Util.FindFirstAddress("HiddenPointCount", achievementAddress));
-            _hiddenPointCountAddress = gvas.Key("HiddenPointCount").Address;
+            IsExistHiddenPointCount = Util.TryFindFirstAddress("HiddenPointCount", achievementAddress, out _hiddenPointCountAddress);
+            if (IsExistHiddenPointCount)
+            {
+                gvas.AppendValue(_hiddenPointCountAddress);
+                _hiddenPointCountAddress = gvas.Key("HiddenPointCount").Address;
+            }
 
             gvas = new GVAS(null);
             gvas.AppendValue(Util.FindFirstAddress("ItemFlag", achievementAddress));

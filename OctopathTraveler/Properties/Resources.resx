@@ -132,6 +132,9 @@
   <data name="BasicHiddenPointCount" xml:space="preserve">
     <value>HiddenPointCount</value>
   </data>
+  <data name="BasicHiddenPointTip" xml:space="preserve">
+    <value>You must find at least one hidden point to modify this data.</value>
+  </data>
   <data name="BasicItemCount" xml:space="preserve">
     <value>ItemCount</value>
   </data>

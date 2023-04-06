@@ -106,6 +106,15 @@ namespace OctopathTraveler.Properties {
         }
         
         /// <summary>
+        ///   查找类似 You must find at least one hidden point to modify this data. 的本地化字符串。
+        /// </summary>
+        public static string BasicHiddenPointTip {
+            get {
+                return ResourceManager.GetString("BasicHiddenPointTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 ItemCount 的本地化字符串。
         /// </summary>
         public static string BasicItemCount {

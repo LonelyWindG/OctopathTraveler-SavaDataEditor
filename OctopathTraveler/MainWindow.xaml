@@ -76,14 +76,17 @@
                         <Label Grid.Row="5" Content="{x:Static properties:Resources.BasicBattleCount}" VerticalAlignment="Center"/>
                         <Label Grid.Row="6" Content="{x:Static properties:Resources.BasicEscapeCount}" VerticalAlignment="Center"/>
                         <Label Grid.Row="7" Content="{x:Static properties:Resources.BasicTreasureCount}" VerticalAlignment="Center"/>
-                        <Label Grid.Row="8" Content="{x:Static properties:Resources.BasicHiddenPointCount}" VerticalAlignment="Center"/>
+                        <Label Grid.Row="8" VerticalAlignment="Center" ToolTip="" Name="LabelBasicHiddenPointCount">
+                            <TextBlock FontWeight="Bold" Text="{x:Static properties:Resources.BasicHiddenPointCount}"/>
+                        </Label>
                         <Label Grid.Row="9" VerticalAlignment="Center" ToolTip="" Name="LabelBasicItemCount">
                             <TextBlock FontWeight="Bold" Text="{x:Static properties:Resources.BasicItemCount}"/>
                         </Label>
                         <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding BasicData.BattleCount, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
                         <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding BasicData.EscapeCount, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
                         <TextBox Grid.Row="7" Grid.Column="2" Text="{Binding BasicData.TreasureCount, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
-                        <TextBox Grid.Row="8" Grid.Column="2" Text="{Binding BasicData.HiddenPointCount, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center"/>
+                        <TextBox Grid.Row="8" Grid.Column="2" Text="{Binding BasicData.HiddenPointCount, UpdateSourceTrigger=PropertyChanged}"
+                                 VerticalContentAlignment="Center" IsEnabled="{Binding BasicData.IsExistHiddenPointCount}"/>
                         <Label Grid.Row="9" Grid.Column="2" Content="{Binding BasicData.ItemCount}" Margin="-4,0,0,0"/>
                     </Grid>
                 </TabItem>
