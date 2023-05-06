@@ -33,5 +33,13 @@ namespace OctopathTraveler
 		{
 			return ReadNumber(gvas.Key(key));
 		}
+
+		public static uint ReadNumberOrDefault(this GVAS gvas, string key, uint defaultValue = default)
+		{
+			if (!gvas.HasKey(key))
+				return defaultValue;
+
+            return ReadNumber(gvas.Key(key));
+        }
 	}
 }

@@ -73,8 +73,9 @@ namespace OctopathTraveler
             {
                 gvas.AppendValue(address, false);
             }
-            SaveDate = new DateTime((int)gvas.ReadNumber("SaveDate_Year"), (int)gvas.ReadNumber("SaveDate_Month"), (int)gvas.ReadNumber("SaveDate_Day"),
-                (int)gvas.ReadNumber("SaveDate_Hour"), (int)gvas.ReadNumber("SaveDate_Minute"), (int)gvas.ReadNumber("SaveDate_Second")).ToString();
+            SaveDate = new DateTime((int)gvas.ReadNumberOrDefault("SaveDate_Year"), (int)gvas.ReadNumberOrDefault("SaveDate_Month"),
+                (int)gvas.ReadNumberOrDefault("SaveDate_Day"), (int)gvas.ReadNumberOrDefault("SaveDate_Hour"),
+                (int)gvas.ReadNumberOrDefault("SaveDate_Minute"), (int)gvas.ReadNumberOrDefault("SaveDate_Second")).ToString();
 
             gvas.AppendValue(Util.FindFirstAddress("PlayTime", soltDataAddress));
             var playTime = new TimeSpan(gvas.ReadNumber("PlayTime") * TimeSpan.TicksPerSecond);
