@@ -1,7 +1,7 @@
 # 八方旅人存档编辑器
 
 [![GitHub release](https://img.shields.io/github/v/release/LonelyWindG/OctopathTraveler-SaveDataEditor?style=for-the-badge)](https://github.com/LonelyWindG/OctopathTraveler-SaveDataEditor/releases/latest)
-[![GitHub all releases](https://img.shields.io/github/downloads/turtle-insect/OctopathTraveler/total?style=for-the-badge&color=00B000)](https://github.com/LonelyWindG/OctopathTraveler-SaveDataEditor/releases)
+[![GitHub all releases](https://img.shields.io/github/downloads/LonelyWindG/OctopathTraveler-SaveDataEditor/total?style=for-the-badge&color=00B000)](https://github.com/LonelyWindG/OctopathTraveler-SaveDataEditor/releases)
 [![GPLv3 license](https://img.shields.io/github/license/LonelyWindG/OctopathTraveler-SaveDataEditor?style=for-the-badge&color=blue)](https://github.com/LonelyWindG/OctopathTraveler-SaveDataEditor/blob/master/LICENSE)
 [![Windows](https://img.shields.io/badge/PLATFORM-Windows-blueviolet?style=for-the-badge)](https://dotnet.microsoft.com/zh-cn/apps/desktop)
 [![.NET 6.0](https://img.shields.io/badge/.NET-6.0-%234122AA?style=for-the-badge)](https://dotnet.microsoft.com/zh-cn/download/dotnet/6.0)
